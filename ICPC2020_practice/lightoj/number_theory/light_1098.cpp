@@ -2,7 +2,7 @@
     Sk arman Hossain
     University of Barisal
 
-    Problem :
+    Problem : lightoj 1098
     Solution :
  */
 #include<bits/stdc++.h>
@@ -38,9 +38,35 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll sum(ll a,ll b)
+{
+    ll sum1=0,sum2=0;
+    a--;
+    if(b%2==0)
+    {
+        sum1=b/2;
+        sum1*=(b+1);
+    }
+    else
+    {
+        sum1=(b+1)/2;
+        sum1*=b;
+    }
+    if(a%2==0)
+    {
+        sum2=a/2;
+        sum2*=(a+1);
+    }
+    else
+    {
+        sum2=(a+1)/2;
+        sum2*=a;
+    }
+    return sum1-sum2;
+}
 int main()
 {
-    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);cin.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -52,25 +78,26 @@ int main()
         cin>>n;
         ll ans=0;
         ll sq=sqrt(n);
-        ll total=(n*(n+1))/2;
-        ll half=n/2;
-        ll half_sum=(half*(half+1))/2;
-        half_sum=total-half_sum;
-        total-=half_sum;
-        if(n>1)
-        total-=1;
-        for(ll i=2;i<=sq;i++){
+        ll prev=0;
+        for(ll i=2; i<=sq; i++)
+        {
             ans+=((n/i)-1)*i;
             ll tm=n/i;
-            total-=i;
-            if(tm!=i){
+            if(prev!=0)
+            {
+                ans+=(sum(tm+1,prev-1)*(i-2));
+            }
+            prev=tm;
+            if(tm!=i)
+            {
                 ans+=((n/tm)-1)*tm;
-                total-=tm;
+                if(i==sq)
+                {
+                    ans+=(sum(i+1,tm-1)*(i-1));
+                }
             }
         }
-        ans+=total;
-        cout<<"Case "<<test<<": "<<ans<<"\n";
-
+        cout<<"Case "<<test<<": "<<ans<<endl;
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
