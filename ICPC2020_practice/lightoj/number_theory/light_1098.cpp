@@ -40,7 +40,7 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -49,22 +49,30 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<n;i++){
-            if(i%3==0){
-                cout<<"a";
-            }
-            else if(i%3==1){
-                cout<<"b";
-            }
-            else{
-                cout<<"c";
+        cin>>n;
+        ll ans=0;
+        ll sq=sqrt(n);
+        ll total=(n*(n+1))/2;
+        ll half=n/2;
+        ll half_sum=(half*(half+1))/2;
+        half_sum=total-half_sum;
+        total-=half_sum;
+        if(n>1)
+        total-=1;
+        for(ll i=2;i<=sq;i++){
+            ans+=((n/i)-1)*i;
+            ll tm=n/i;
+            total-=i;
+            if(tm!=i){
+                ans+=((n/tm)-1)*tm;
+                total-=tm;
             }
         }
-        cout<<endl;
+        ans+=total;
+        cout<<"Case "<<test<<": "<<ans<<"\n";
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

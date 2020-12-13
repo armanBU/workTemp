@@ -43,25 +43,20 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<n;i++){
-            if(i%3==0){
-                cout<<"a";
-            }
-            else if(i%3==1){
-                cout<<"b";
-            }
-            else{
-                cout<<"c";
-            }
-        }
-        cout<<endl;
+        vector<ll>V;
+        V.PB(1);
+        V.PB(1);
+        V.PB(3);
+        V.PB(3);
+        V.PB(3);
+        ll pos=upper_bound(V.begin()+1,V.begin()+5,2)-V.begin();
+        cout<<pos<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

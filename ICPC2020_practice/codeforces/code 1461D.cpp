@@ -38,30 +38,76 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll ar[100010];
+map<ll,ll>mp;
+vector<ll>V;
+void rec(ll i,ll j)
+{
+    if(i>=j)
+    {
+        mp[ar[i]-ar[i-1]]=1;
+        return;
+    }
+    ll tm=(V[j-1]+V[i-1])/2;
+    ll pos=upper_bound(V.begin()+i-1,V.begin()+j,tm)-V.begin();
+    //cout<<i<<" "<<j<<" "<<pos<<" t\n";
+    //pos--;pos++;
+    mp[ar[pos]-ar[i-1]]=1;
+    mp[ar[j]-ar[pos]]=1;
+    if(tm!=V[j-1]){
+      rec(i,pos);
+    rec(pos+1,j);
+    }
+
+}
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+    //freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        V.clear();
+        mp.clear();
         ll n,m;
         cin>>n>>m;
-        for(ll i=0;i<n;i++){
-            if(i%3==0){
-                cout<<"a";
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+            ar[i]=0;
+        }
+        ar[n]=0;
+        VST(V);
+        ll sum=0;
+        for(ll i=0; i<n; i++)
+        {
+            sum+=V[i];
+            ar[i+1]=sum;
+        }
+        mp[sum]=1;
+//        for(ll i=0;i<n;i++){
+//            cout<<V[i]<<" "<<ar[i+1]<<"\n";
+//        }
+        rec(1,n);
+        for(ll i=0; i<m; i++)
+        {
+            ll a;
+            cin>>a;
+            if(mp.count(a))
+            {
+                cout<<"Yes\n";
             }
-            else if(i%3==1){
-                cout<<"b";
-            }
-            else{
-                cout<<"c";
+            else
+            {
+                cout<<"No\n";
             }
         }
-        cout<<endl;
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

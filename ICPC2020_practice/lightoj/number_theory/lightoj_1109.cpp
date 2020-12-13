@@ -38,9 +38,70 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+bitset<34>ck;
+vector<ll>prime;
+vector<PR>ans;
+void seive()
+{
+    prime.PB(2);
+    for(ll i=3; i<=33; i+=2)
+    {
+        if(!ck[i])
+        {
+            prime.PB(i);
+            for(ll j=i*i; j<=33; j+=(i+i))
+            {
+                ck[j]=1;
+            }
+        }
+    }
+    ans.PB({1,1});
+    for(ll i=2; i<=1000; i++)
+    {
+        ll n=i;
+        ll sq=sqrt(n+1);
+        ll siz=prime.size();
+        ll cnt=1;
+        for(ll j=0; j<siz&&prime[j]<=sq; j++)
+        {
+            if(n%prime[j]==0)
+            {
+                ll cn=0;
+                while(n%prime[j]==0)
+                {
+                    n/=prime[j];
+                    cn++;
+                }
+                cnt*=(cn+1);
+            }
+            sq=sqrt(n);
+        }
+        if(n>1)
+        {
+            cnt*=2;
+        }
+        ans.PB({i,cnt});
+    }
+    sort(ans.begin(), ans.end(), [&](PR a, PR b)
+    {
+        if (a.second != b.second)
+        {
+            return a.second < b.second;
+        }
+        if (a.first != b.first)
+        {
+            return a.first > b.first;
+        }
+    });
+//    for(ll i=0;i<10;i++){
+//        cout<<ans[i].first<<" "<<ans[i].second<<" t\n";
+//    }
+}
+
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    seive();
+    ios_base::sync_with_stdio(false);cin.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -49,19 +110,8 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n>>m;
-        for(ll i=0;i<n;i++){
-            if(i%3==0){
-                cout<<"a";
-            }
-            else if(i%3==1){
-                cout<<"b";
-            }
-            else{
-                cout<<"c";
-            }
-        }
-        cout<<endl;
+        cin>>n;
+        cout<<"Case "<<test<<": "<<ans[n-1].first<<endl;
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
