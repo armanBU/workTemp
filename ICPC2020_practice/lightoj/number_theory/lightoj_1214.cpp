@@ -76,6 +76,7 @@ int main()
             cout<<"Case "<<test<<": divisible"<<endl;
         }
         else{
+
             cout<<"Case "<<test<<": not divisible"<<endl;
         }
     }
