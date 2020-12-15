@@ -1,65 +1,84 @@
-/*
-    Sk arman Hossain
-    University of Barisal
-
-    Problem :
-    Solution :
- */
-#include<bits/stdc++.h>
-#define nl cout<<"\n";
-#define N 200001
-#define PR pair<ll,ll>
-#define sf1(n) cin>>n
-#define sf2(n, m) cin>>n>>m
-#define sf3(n, m,k ) cin>>n>>m>>k
-#define pfn(n) printf("%d\n",n)s
-#define pf1(n) printf("%d ",n)
-#define pfl1(n) printf("%lld ",n)
-#define pfln(n) printf("%lld\n",n)
-#define pfu(n) printf("%llu\n",n)
-#define pfs(s) printf("%s",s)
-#define YES cout<<"YES\n";
-#define NO cout<<"NO\n";
-#define minus1 printf("-1\n");
-#define PB push_back
-#define PI 3.1415926536
-#define VST(v) sort(v.begin(),v.end())
-#define VSTcmp(v,cmp) sort(v.begin(),v.end(),cmp)
-#define fori(i,n) for(;i<n;i++)
-#define fast ios_base::sync_with_stdio(0);cin.tie(0)
-#define MP make_pair
-#define ff first
-#define ss second
-#define tt third
-#define mod 1000000007
-#define T(n) printf("test %d\n",n)
-int dx[] = {0,0,1,-1,2,2,-2,-2,1,-1,1,-1};
-int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
-typedef long long int ll;
-typedef unsigned long long int ull;
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+#include <algorithm>
 using namespace std;
-int main()
-{
-    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
-//    freopen("1output.txt","w",stdout);
-    ll sum=0;
-    for(ll i=1;i<=100;i++){
-        ll n=i;
-        printf("%d :",i);
-        ll tm=0;
-        for(ll j=2;j<n;j++){
-            if(n%j==0){
-                printf("%lld ",j);
-                tm+=j;
-            }
 
-        }
-        sum+=tm;
-        printf("%lld %lld\n",tm,sum);
-    }
-///*****************************  ALHAMDULILLAH  *****************************/
+#define size 100000100
+long long a[size / 64 + 100];
+unsigned prime[5761558];
+unsigned int dp[5761558];
+
+int cnt;
+
+int sieve_with_bit_masking()
+{
+
+
+	for (long long i = 3; i <= sqrt(size); i += 2) {
+		if(!(a[i/64]&(1LL<<(i%64)))) {
+			for(long long j = i * i; j <= size; j += 2 * i) {
+				a[j/64] |= (1LL<<(j%64));
+			}
+		}
+	}
+
+	prime[cnt++] = 2;
+	for (long long i = 3; i <= size; i += 2) {
+		if(!(a[i / 64] & (1LL << (i % 64)))) {
+			prime[cnt++] = i;
+		}
+
+	}
+
+	return 0;
+
+
 }
 
+unsigned find_product(int x)
+{
+	unsigned ans;
+	unsigned temp;
+	ans = 1;
+	for (int i = 0; prime[i] * prime[i] <= x; i++ ) {
+		temp = x;
+		temp = temp / prime[i];
+		while(temp >= prime[i]) {
+			temp = temp / prime[i];
+			ans = ans * prime[i];
+		}
 
+	}
 
+	return ans;
+}
+int main()
+{
+	int t;
+	int x;
+	int n;
+	unsigned ans;
+	int upper;
+
+	sieve_with_bit_masking();
+
+	dp[0] = 2;
+	for (int i = 1; i < cnt; i++) {
+		dp[i] = dp[i - 1] * (unsigned)prime[i];
+	}
+
+	scanf("%d", &t);
+
+	for (int cs = 1; cs <= t; cs++) {
+		scanf("%d", &x);
+		n = sqrt(x);
+		ans = find_product(x);
+		upper = upper_bound(prime, prime+cnt, x) - prime;
+		upper--;
+		ans *= dp[upper];
+
+		printf("Case %d: %u\n", cs, ans);
+
+	}
+}

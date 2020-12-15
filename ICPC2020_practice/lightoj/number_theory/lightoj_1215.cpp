@@ -107,9 +107,10 @@ ll fac(ll num, ll a,ll b)
 }
 int main()
 {
+
     seive();
     //ios_base::sync_with_stdio(false);cin.tie(0);
-    //freopen("1input.txt","r",stdin);
+    freopen("1input.txt","r",stdin);
     //freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
@@ -150,6 +151,7 @@ int main()
             printf("Case %lld: %lld\n",test,l);
         }
     }
+
     return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

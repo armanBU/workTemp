@@ -1,6 +1,10 @@
-Case 1: 8
-Case 2: 16
-Case 3: 3
-Case 4: impossible
-Case 5: 24
-Case 6: 432
+Case 1: 2
+Case 2: 1059261584
+Case 3: 1037843456
+Case 4: 201326592
+Case 5: 1059261584
+Case 6: 201326592
+Case 7: 1037843456
+Case 8: 2021724160
+Case 9: 2
+Case 10: 12252240
