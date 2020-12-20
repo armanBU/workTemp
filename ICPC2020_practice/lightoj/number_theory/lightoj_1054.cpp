@@ -38,52 +38,86 @@ typedef unsigned long long int ull;
 using namespace std;
 #define mod 1000000007
 vector<ll>prime;
-void seive(){
+void seive()
+{
     prime.PB(2);
     bitset<46440>ck;
-    for(ll i=3;i<=46350;i+=2){
-        if(ck[i]==false){
+    for(ll i=3; i<=46350; i+=2)
+    {
+        if(ck[i]==false)
+        {
             prime.PB(i);
-            for(ll j=i*i;j<=46350;j+=(i+i)){
+            for(ll j=i*i; j<=46350; j+=(i+i))
+            {
                 ck[j]=true;
             }
         }
     }
 }
-ll bigmod(ll n,ll po){
-    if(po==0){
+ll extended_euclidean(ll a, ll b, ll& x, ll& y)
+{
+    if (b == 0)
+    {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    ll x1, y1;
+    ll d = extended_euclidean(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
+}
+ll bigmod(ll n,ll po)
+{
+    if(po==0)
+    {
         return 1;
     }
-    if(po==1){
+    if(po==1)
+    {
         return n;
     }
-    if(po%2==0){
+    if(po%2==0)
+    {
         ll p=bigmod(n,po/2);
         return ((p%mod)*(p%mod))%mod;
     }
-    else{
+    else
+    {
         return ((bigmod(n,po-1)*n)%mod);
     }
 }
-ll fac(ll n,ll k){
+ll fac(ll n,ll k)
+{
     ll siz=prime.size();
     ll sq=sqrt(n+1);
     ll ans=1;
-    for(ll i=0;i<siz&&prime[i]<=sq;i++){
-        if(n%prime[i]==0){
+    for(ll i=0; i<siz&&prime[i]<=sq; i++)
+    {
+        if(n%prime[i]==0)
+        {
             ll cnt=0;
-            while(n%prime[i]==0){
+            while(n%prime[i]==0)
+            {
                 n/=prime[i];
                 cnt++;
             }
             cnt*=k;
-            ll tm=(((bigmod(prime[i],cnt+1)-1+mod)%mod)/(prime[i]-1);
+            ll x,y;
+            ll g = extended_euclidean(prime[i]-1, mod, x, y);
+            x = (x % mod + mod) % mod;
+            ll tm=(((bigmod(prime[i],cnt+1)-1+mod)%mod)*(x%mod))%mod;
             ans=((ans%mod)*(tm%mod))%mod;
         }
         sq=sqrt(n);
     }
-    if(n>1){
-        ll tm=(bigmod(n,k+1)-1)/(n-1);
+    if(n>1)
+    {
+        ll x,y;
+        ll g = extended_euclidean(n-1, mod, x, y);
+        x = (x % mod + mod) % mod;
+        ll tm=(((bigmod(n,k+1)-1+mod)%mod)*(x%mod))%mod;
         ans=((ans%mod)*(tm%mod))%mod;
     }
     return ans;
@@ -91,7 +125,8 @@ ll fac(ll n,ll k){
 int main()
 {
     seive();
-    ios_base::sync_with_stdio(false);cin.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
