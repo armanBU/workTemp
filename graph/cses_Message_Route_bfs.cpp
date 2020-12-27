@@ -38,20 +38,75 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+vector<ll>edj[200010];
+int parent[200010];
+void bfs(ll start)
+{
+    queue<ll>q;
+    q.push(start);
+    parent[start]=start;
+    while(!q.empty())
+    {
+        ll p=q.front();
+        q.pop();
+        for(ll i:edj[p])
+        {
+            if(parent[i]==-1)
+            {
+                parent[i]=p;
+                q.push(i);
+            }
+        }
+    }
+}
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n;
+        cin>>n>>m;
+        for(ll i=0; i<m; i++)
+        {
+            ll a,b;
+            cin>>a>>b;
+            edj[a].PB(b);
+            edj[b].PB(a);
+        }
+        for(ll i=0; i<=n; i++)
+        {
+            parent[i]=-1;
+        }
+        bfs(1);
+        if(parent[n]==-1)
+        {
+            cout<<"IMPOSSIBLE\n";
+        }
+        else
+        {
+            vector<ll>V;
 
+            for(ll i=n; parent[i]!=i; i=parent[i])
+            {
+                V.PB(i);
+            }
+            V.PB(1);
+            reverse(V.begin(),V.end());
+            ll siz=V.size();
+            cout<<siz<<"\n";
+            for(ll i=0; i<siz; i++)
+            {
+                cout<<V[i]<<" ";
+            }
+            cout<<"\n";
+        }
     }
+    return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
 

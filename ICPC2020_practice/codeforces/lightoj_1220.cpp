@@ -38,21 +38,56 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+bitset<100010>ck;
+vector<ll>prime;
+ll seive(){
+    prime.PB(2);
+    for(ll i=3;i<=100000;i+=2){
+        if(!ck[i]){
+            prime.PB(i);
+            for(ll j=i*i;j<=100000;j+=(i+i)){
+                ck[i]=1;
+            }
+        }
+    }
+}
+void fac(ll n,ll& ans){
+    ll sq=sqrt(n+1);
+    ll siz=prime.size();
+    for(ll i=0;prime[i]<=sq;i+=1){
+        if(n%prime[i]==0){
+            ll cnt=0;
+            while(n%prime[i]==0){
+                n/=prime[i];
+                cnt++;
+            }
+            ans=cnt;
+            break;
+        }
+    }
+    if(n>1){
+        ans=1;
+    }
+}
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    seive();
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
     //sf1(tcase);
-    cin>>tcase;
+    scanf("%lld",&tcase);
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
-
+        ll n;
+        scanf("%lld",&n);
+        ll ans;
+        fac(n,ans);
+        printf("Case %lld: %lld\n",test,ans);
     }
+    return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
