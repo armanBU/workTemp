@@ -50,30 +50,35 @@ int main()
     {
         ll n,m;
         cin>>n;
-        ll ck=1;
-        while(ck){
-            ll num=n;
-            ll divi=0;
-            while(num){
-                ll last=num%10;
-                num/=10;
-                if(last>0){
-                    if(n%last!=0){
-                        divi=1;
-                        break;
-                    }
-                }
-            }
-            if(divi){
-                n++;
-            }
-            else{
-                ck=0;
-                break;
-            }
-
+        ll sum=0;
+        vector<ll>first,second;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            sum+=a;
+            first.PB(sum);
         }
-        cout<<n<<"\n";
+        cin>>m;
+        sum=0;
+        for(ll i=0; i<m; i++)
+        {
+            ll a;
+            cin>>a;
+            sum+=a;
+            second.PB(sum);
+        }
+        ll ma=0;
+        for(ll i=0; i<n; i++)
+        {
+            for(ll j=0; j<m; j++)
+            {
+                ma=max(ma,first[i]+second[j]);
+                ma=max(ma,first[i]);
+                ma=max(ma,second[j]);
+            }
+        }
+        cout<<ma<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

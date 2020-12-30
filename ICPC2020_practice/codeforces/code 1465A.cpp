@@ -40,9 +40,7 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -50,29 +48,23 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        ll n,m,cnt=0;
         cin>>n;
         string s;
         cin>>s;
-        ll cnt=0;
-        for(ll i=n-1; i>=0; i--)
-        {
-            if(s[i]==')')
-            {
-                cnt++;
+        for(ll i=n-1;i>=0;i--){
+            if(s[i]!=')'){
+                break;
             }
-            else
-            {
-               break;
-            }
+            else cnt++;
         }
-        ll tm=n-cnt;
-        if(cnt<=tm){
-            cout<<"No\n";
-        }
-        else{
+        if(cnt>(n-cnt)){
             cout<<"Yes\n";
         }
+        else{
+            cout<<"No\n";
+        }
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

@@ -48,34 +48,33 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        vector<ll>V;
         ll n,m;
         cin>>n;
-        ll ck=1;
-        while(ck){
-            ll num=n;
-            ll divi=0;
-            while(num){
-                ll last=num%10;
-                num/=10;
-                if(last>0){
-                    if(n%last!=0){
-                        divi=1;
-                        break;
-                    }
-                }
-            }
-            if(divi){
-                n++;
-            }
-            else{
-                ck=0;
-                break;
-            }
-
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        cout<<n<<"\n";
+        VST(V);
+        ll ans=0;
+        ll last=V[n-1]+1;
+        for(ll i=n-1;i>=0;i--){
+            if(V[i]<last){
+                last=V[i];
+                ans++;
+            }
+            else if(V[i]==last){
+                last--;
+                ans++;
+            }
+        }
+        cout<<ans<<"\n";
+
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

@@ -38,44 +38,66 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll ar[200010];
+vector<ll>edj[200010];
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+    // freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        ll n,sum=0;
         cin>>n;
-        ll ck=1;
-        while(ck){
-            ll num=n;
-            ll divi=0;
-            while(num){
-                ll last=num%10;
-                num/=10;
-                if(last>0){
-                    if(n%last!=0){
-                        divi=1;
-                        break;
-                    }
-                }
-            }
-            if(divi){
-                n++;
-            }
-            else{
-                ck=0;
-                break;
-            }
-
+        for(ll i=1; i<=n; i++)
+        {
+            ll a;
+            cin>>a;
+            ar[i]=a;
+            edj[i].clear();
+            sum+=a;
         }
-        cout<<n<<"\n";
+        for(ll i=0; i<n-1; i++)
+        {
+            ll a,b;
+            cin>>a>>b;
+            edj[a].PB(b);
+            edj[b].PB(a);
+        }
+        vector<ll>V;
+        for(ll i=0; i<n; i++)
+        {
+            ll siz=edj[i+1].size();
+            if(siz>1)
+            {
+                for(ll j=1; j<siz; j++)
+                    V.PB(ar[i+1]);
+            }
+        }
+        VST(V);
+        reverse(V.begin(),V.end());
+        cout<<sum<<" ";
+        ll siz=V.size();
+        for(ll i=0; i<siz; i++)
+        {
+            sum+=V[i];
+            V[i]=sum;
+        }
+        for(ll i=siz; i<n-2; i++)
+        {
+            V.PB(sum);
+        }
+        for(ll i=0; i<n-2; i++)
+        {
+            cout<<V[i]<<" ";
+        }
+        cout<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

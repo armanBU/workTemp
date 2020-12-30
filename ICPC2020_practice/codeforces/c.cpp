@@ -40,7 +40,9 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(0);
+    //cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -48,32 +50,50 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
+        vector<ll>V;
+        ll n,m,k;
+        cin>>n>>k;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll mi=0,ma=0;
+        mi=V[0];
+        ma=V[0]+k;
         ll ck=1;
-        while(ck){
-            ll num=n;
-            ll divi=0;
-            while(num){
-                ll last=num%10;
-                num/=10;
-                if(last>0){
-                    if(n%last!=0){
-                        divi=1;
-                        break;
-                    }
-                }
-            }
-            if(divi){
-                n++;
-            }
-            else{
-                ck=0;
+        for(ll i=1; i<n-1; i++)
+        {
+            if(V[i]>=ma)
+            {
+                ck=0;//T(3);//cout<<"ff\n";
                 break;
             }
-
+            if(V[i]+k+k-1<=mi)
+            {
+                ck=0;//T(i);
+                //T(4);
+                //cout<<"ff22\n";
+                break;
+            }
+            mi=max(V[i],mi-(k-1));
+            ma=min(V[i]+k+k-1,ma+k-1);
+            //cout<<mi<<" "<<ma<<" \n";
         }
-        cout<<n<<"\n";
+        if(mi>=(V[n-1]+k)||(V[n-1]>=ma))
+        {
+            ck=0;
+        }
+        if(ck)
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

@@ -48,34 +48,28 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        vector<ll>V;
+        set<ll>st;
         ll n,m;
         cin>>n;
-        ll ck=1;
-        while(ck){
-            ll num=n;
-            ll divi=0;
-            while(num){
-                ll last=num%10;
-                num/=10;
-                if(last>0){
-                    if(n%last!=0){
-                        divi=1;
-                        break;
-                    }
-                }
-            }
-            if(divi){
-                n++;
-            }
-            else{
-                ck=0;
-                break;
-            }
-
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
         }
-        cout<<n<<"\n";
+        for(ll i=0;i<n-1;i++){
+            for(ll j=i+1;j<n;j++){
+                ll dif=abs(V[i]-V[j]);
+                st.insert(dif);
+            }
+        }
+        ll ans=0;
+        ans=st.size();
+        cout<<ans<<"\n";
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

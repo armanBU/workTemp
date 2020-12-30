@@ -40,7 +40,7 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -48,34 +48,51 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
+        string s;
+        cin>>s;
+        stack<char>st;
+//        for(ll i=0; s[i]!='\0'; i++)
+//        {
+//            if(s[i]=='(')
+//            {
+//                st.push(s[i]);
+//            }
+//            else if(st.empty())
+//            {
+//                if(s[i]=='?'||s[i]=='(')
+//                {
+//                    st.push('(');
+//                }
+//                else
+//                {
+//                    st.push(')');
+//                    break;
+//                }
+//            }
+//            else
+//            {
+//                st.pop();
+//            }
+//        }
         ll ck=1;
-        while(ck){
-            ll num=n;
-            ll divi=0;
-            while(num){
-                ll last=num%10;
-                num/=10;
-                if(last>0){
-                    if(n%last!=0){
-                        divi=1;
-                        break;
-                    }
-                }
-            }
-            if(divi){
-                n++;
-            }
-            else{
-                ck=0;
-                break;
-            }
-
+        ll n=s.size();
+        if(n%2)
+        {
+            ck=0;
         }
-        cout<<n<<"\n";
+        if(s[0]==')'||s[n-1]=='(')ck=0;
+        if(ck)
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
