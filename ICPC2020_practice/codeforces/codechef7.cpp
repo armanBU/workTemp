@@ -38,10 +38,11 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-vector<ll>V;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -49,27 +50,54 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        V.clear();
-        ll n,ma=0;
-        cin>>n;
+        ll n,m;
+        cin>>n>>m;
+        vector<ll>OR,AND;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
-            V.PB({});
+            OR.PB(a);
         }
-        for(ll i=n-1;i>=0;i--){
-            ll tm=V[i]+i;
-            if(tm<n){
-                V[i]+=V[tm];
+        for(ll j=0; j<m; j++)
+        {
+            ll a;
+            cin>>a;
+            AND.PB(a);
+        }
+        set<ll>st;
+        st.insert(0);
+        ll j=0;
+        for(ll i=0; i<n; i++)
+        {
+            vector<ll>tm;
+            for(ll j:st)
+            {
+                tm.PB(j|OR[i]);
             }
-            ma=max(V[i],ma);
+            for(ll j:tm)
+            {
+                st.insert(j);
+            }
         }
-        cout<<ma<<"\n";
+        for(ll i=0; i<m; i++)
+        {
+            vector<ll>tm;
+            for(ll j:st)
+            {
+                tm.PB(j&AND[i]);
+            }
+            for(ll j:tm)
+            {
+                st.insert(j);
+            }
+        }
+        ll ans=st.size();
+        cout<<ans<<"\n";
 
     }
+    return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

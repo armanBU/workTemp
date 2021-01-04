@@ -28,8 +28,6 @@
 #define fori(i,n) for(;i<n;i++)
 #define fast ios_base::sync_with_stdio(0);cin.tie(0)
 #define MP make_pair
-#define ff first
-#define ss second
 #define tt third
 #define mod 1000000007
 #define T(n) printf("test %d\n",n)
@@ -38,11 +36,50 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-vector<ll>V;
+ll mem[4010][4010],n,k;
+vector<ll>V,cum;
+ll dp(ll i,ll sum)
+{
+    if(sum>=k)
+    {
+        ll retun=0;
+        ll second=cum[i-1]-sum;
+        if(second>=k)
+        {
+            retun=i;
+        }
+        else
+        {
+            ll baki=k-second;
+            if(cum[n-1]-cum[i-1]>=baki)
+            {
+                baki+=cum[i-1];
+                ll pos=lower_bound(cum.begin(),cum.end(),baki)-cum.begin();
+                pos++;
+                retun=pos;
+            }
+            else
+            {
+                retun=LONG_MAX;
+            }
+
+        }
+        return retun;
+    }
+    else if(i>=n)
+    {
+        return LONG_MAX;
+    }
+    if(mem[i][sum]!=-1)return mem[i][sum];
+    ll ans=LONG_MAX;
+    ans=min(ans,dp(i+1,sum+V[i]));
+    ans=min(ans,dp(i+1,sum));
+    return mem[i][sum]=ans;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+    //freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
     //sf1(tcase);
@@ -50,26 +87,41 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         V.clear();
-        ll n,ma=0;
-        cin>>n;
+        cum.clear();
+        cin>>n>>k;
+        for(ll i=0; i<=n; i++)
+        {
+            for(ll j=0; j<=k; j++)
+            {
+
+                mem[i][j]=-1;
+
+            }
+        }
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
-            V.PB({});
+            V.PB(a);
         }
-        for(ll i=n-1;i>=0;i--){
-            ll tm=V[i]+i;
-            if(tm<n){
-                V[i]+=V[tm];
-            }
-            ma=max(V[i],ma);
+        VST(V);
+        reverse(V.begin(),V.end());
+        ll sum=0;
+        for(ll i:V)
+        {
+            sum+=i;
+            cum.PB(sum);
         }
-        cout<<ma<<"\n";
+        ll ans=dp(0,0);
+        if(ans>n)
+        {
+            cout<<"-1\n";
+        }
+        else
+        {
+            cout<<ans<<"\n";
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
-
-

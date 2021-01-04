@@ -40,7 +40,7 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
@@ -48,72 +48,55 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V;
-        ll n,k,sum=0;
-        string s;
-        cin>>s;
-        n=s.size();
-        ll ar[30];
-        for(ll i=0; i<26; i++)
-        {
-            ar[i]=0;
+        vector<ll>john,jack;
+        ll n,m,sjohn=0,sjack=0;
+        cin>>n>>m;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            sjohn+=a;
+            john.PB(a);
         }
-        for(ll i=0; i<n; i++)
-        {
-            ar[s[i]-'a']++;
+        for(ll i=0;i<m;i++){
+            ll a;
+            cin>>a;
+            jack.PB(a);
+            sjack+=a;
         }
-        for(ll i=0; i<=25; i++)
-        {
-            if(ar[i]>0)
-                V.PB(ar[i]);
+        if(sjohn>sjack){
+            cout<<"0\n";continue;
         }
-        VST(V);
-        n=V.size();
-        ll left=0,right=n-1;
-        ll ans=0;
-        ll single=0;
-        while(left<right)
-        {
-            if(single>0)
-            {
-                ll mi=min(single,V[right]/2);
-                ans+=mi;
-                single-=mi;
-                V[right]-=(mi*2);
+        VST(john);
+        VST(jack);
+        ll j=m-1;
+        ll cnt=0;
+        for(ll i=0;i<n;i++){
+            if(jack[j]>john[i]){
+                ll tmjohn=john[i];
+                ll tmjack=jack[j];
+                swap(john[i],jack[j]);
+                sjohn-=tmjohn;
+                sjohn+=john[i];
+                sjack-=tmjack;
+                sjack+=jack[j];
+                j--;
+                cnt++;
             }
-            ll mi=min(V[left],V[right]/2);
-            ans+=mi;
-            V[left]-=mi;
-            V[right]-=(mi*2);
-            if(V[right]%2!=0)
-            {
-                single+=1;
-                V[right]--;
+            else{
+                break;
             }
-            if(V[right]==0)
-            {
-                right--;
-            }
-            if(V[left]==0)
-            {
-                left++;
+            if(j<0||sjohn>sjack){
+                break;
             }
         }
-        if(left==right)
-        {
-            if(single>0)
-            {
-                ll mi=min(single,V[right]/2);
-                ans+=mi;
-                single-=mi;
-                V[right]-=(mi*2);
-            }
-            ans+=V[right]/3;
+        if(sjack<sjohn){
+            cout<<cnt<<"\n";
         }
-        cout<<ans<<"\n";
+        else{
+            cout<<"-1\n";
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

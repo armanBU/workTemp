@@ -39,6 +39,23 @@ typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
 vector<ll>V;
+ll n;
+ll ar[200010];
+ll dfs(ll node)
+{
+    if(node>n)
+    {
+        return 0;
+    }
+    if(ar[node]!=0)
+    {
+        return ar[node];
+    }
+    ll ans=V[node];
+    ll x=dfs(V[node]+node);
+    ans+=x;
+    return ar[node]=ans;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -50,20 +67,23 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         V.clear();
-        ll n,ma=0;
         cin>>n;
+        V.PB(0);
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
-            V.PB({});
+            V.PB(a);
+            ar[i+1]=0;
         }
-        for(ll i=n-1;i>=0;i--){
-            ll tm=V[i]+i;
-            if(tm<n){
-                V[i]+=V[tm];
+        ll ma=0;
+        for(ll i=1; i<=n; i++)
+        {
+            if(ar[i]==0)
+            {
+                ll ans=dfs(i);
+                ma=max(ans,ma);
             }
-            ma=max(V[i],ma);
         }
         cout<<ma<<"\n";
 

@@ -38,7 +38,6 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-vector<ll>V;
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -49,27 +48,53 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        V.clear();
-        ll n,ma=0;
-        cin>>n;
-        for(ll i=0; i<n; i++)
-        {
-            ll a;
-            cin>>a;
-            V.PB({});
+        ll n,k,x,y;
+        cin>>n>>k>>x>>y;
+        k%=4;
+        if(x==y){
+            cout<<n<<" "<<n<<"\n";
         }
-        for(ll i=n-1;i>=0;i--){
-            ll tm=V[i]+i;
-            if(tm<n){
-                V[i]+=V[tm];
+        else{
+            vector<PR>V;
+            V.PB({0,0});
+            if(x>y){
+                ll dif=abs(x-n);
+                x+=dif;
+                y+=dif;
+                V.PB({x,y});
+                dif=abs(y-n);
+                x-=dif;
+                y=n;
+                V.PB({x,y});
+                y-=x;
+                x=0;
+                V.PB({x,y});
+                x+=y;
+                y=0;
+                V[0].first=x;
+                V[0].second=y;
             }
-            ma=max(V[i],ma);
+            else{
+                ll dif=abs(n-y);
+                x+=dif;
+                y+=dif;
+                V.PB({x,y});
+                dif=n-x;
+                x=n;
+                y-=dif;
+                V.PB({x,y});
+                x-=y;
+                y=0;
+                V.PB({x,y});
+                y+=x;
+                x=0;
+                V[0].first=x;
+                V[0].second=y;
+            }
+            cout<<V[k].first<<" "<<V[k].second<<"\n";
         }
-        cout<<ma<<"\n";
-
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

@@ -1,4 +1,3 @@
-3
-bbbbbbb
-abcdcba
-cbbdaba
+1
+4 11 11
+1 2 3 11

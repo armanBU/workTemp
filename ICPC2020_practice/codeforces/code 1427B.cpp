@@ -38,7 +38,6 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-vector<ll>V;
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -49,23 +48,38 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        V.clear();
-        ll n,ma=0;
+        ll n,m;
         cin>>n;
-        for(ll i=0; i<n; i++)
-        {
+        ll two=0,one=0;
+        for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
-            V.PB({});
-        }
-        for(ll i=n-1;i>=0;i--){
-            ll tm=V[i]+i;
-            if(tm<n){
-                V[i]+=V[tm];
+            if(a==1){
+                one++;
             }
-            ma=max(V[i],ma);
+            else{
+                two++;
+            }
         }
-        cout<<ma<<"\n";
+        ll ck=1;
+        if(two%2!=0){
+            if(one>=2){
+                two++;
+                one-=2;
+            }
+            else{
+                ck=0;
+            }
+        }
+        if(two%2!=0||one%2!=0){
+            ck=0;
+        }
+        if(ck==1){
+            YES;
+        }
+        else{
+            NO;
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

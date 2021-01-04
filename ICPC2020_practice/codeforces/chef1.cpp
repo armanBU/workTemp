@@ -48,35 +48,15 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
-        string s,p;
-        cin>>s>>p;
-        ll cnt1=0,cnts=0,cntp=0;
-        ll ck=1;
-        for(ll i=0;i<n&&ck;i++){
-            if(s[i]!=p[i]){
-                if(s[i]=='1'){
-                    cnt1++;
-                }
-                else{
-                    if(cnt1>0){
-                        cnt1--;
-                    }
-                    else{
-                        ck=0;break;
-                    }
-                }
-            }
-            cnts+=(s[i]-'0');
-            cntp+=(p[i]-'0');
+        ll n,m,sum=0,k,d;
+        cin>>n>>k>>d;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            sum+=a;
         }
-        if(ck&&cnts==cntp){
-            cout<<"Yes\n";
-        }
-        else{
-            cout<<"No\n";
-        }
+        ll ans=min((sum/k),d);
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

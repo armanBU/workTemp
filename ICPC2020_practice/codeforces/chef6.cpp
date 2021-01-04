@@ -38,38 +38,71 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-vector<ll>V;
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+    //freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        V.clear();
-        ll n,ma=0;
+        ll n=1,m;
         cin>>n;
-        for(ll i=0; i<n; i++)
+        if(n==1)
         {
-            ll a;
-            cin>>a;
-            V.PB({});
-        }
-        for(ll i=n-1;i>=0;i--){
-            ll tm=V[i]+i;
-            if(tm<n){
-                V[i]+=V[tm];
+            cin>>m;
+            ll neg=0,pos=0;
+            set<ll>ng,pg;
+            for(ll j=0; j<m; j++)
+            {
+                ll a;
+                cin>>a;
+                if(a<=0)
+                {
+                    ng.insert(a);
+                }
+                else
+                {
+                    pg.insert(a);
+                }
             }
-            ma=max(V[i],ma);
+            neg=ng.size();
+            pos=pg.size();
+            ll ans=min(neg,pos);
+            //cout<<ans<<" f\n";
+            ll mi=min(pos,neg);
+            ll ma=max(pos,neg);
+            mi=(mi*(mi-1))/2;
+
+            ll tm_ma=(ma*(ma-1))/2;
+            //cout<<tm_ma<<" dif\n";
+            ll dif=abs(neg-pos);
+            //cout<<dif<<" xx\n";
+            ma=(dif*(dif+1))/2;
+            tm_ma-=ma;
+            tm_ma+=dif;
+            ans+=tm_ma+mi;
+            //cout<<mi<<" "<<tm_ma<<" \n";
+            cout<<ans<<"\n";
         }
-        cout<<ma<<"\n";
+        else
+        {
+            for(ll i=0; i<n; i++)
+            {
+                cin>>m;
+                for(ll j=0; j<m; j++)
+                {
+                    ll a;
+                    cin>>a;
+                }
+            }
+            cout<<"Nothing to show\n";
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
