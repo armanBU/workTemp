@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -50,7 +51,27 @@ int main()
     {
         ll n,m;
         cin>>n;
-
+        int ar[30];
+        memset(ar,0,sizeof(ar));
+        for(ll i=0;i<n;i++){
+            string s;
+            cin>>s;
+            for(ll j=0;s[j]!='\0';j++){
+                ar[s[j]-'a']++;
+            }
+        }
+        ll ck=0;
+        for(ll i=0;i<26;i++){
+            if(ar[i]%n!=0){
+                ck=1;break;
+            }
+        }
+        if(ck){
+            cout<<"NO\n";
+        }
+        else{
+            cout<<"YES\n";
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

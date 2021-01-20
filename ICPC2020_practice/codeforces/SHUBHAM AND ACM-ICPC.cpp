@@ -38,58 +38,90 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[300010];
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-    //freopen("1input.txt","r",stdin);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+//    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n>>m;
-        vector<PR>V;
+        cin>>n;
+        vector<ll>V;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
-            ar[a]++;
+            V.PB(a);
         }
-        for(ll i=1; i<=m; i++)
+        ll ans=1;
+        set<ll>st;
+        for(ll i=1; i<n; i++)
         {
-            ll a;
-            cin>>a;
-            V.PB({a,i});
+            ll val=V[0]+V[i];
+            ll sq=sqrt(val+1);
+            for(ll j=1; j<=sq; j++)
+            {
+                if(val%j==0)
+                {
+                    ll rev=val/j;
+                    st.insert(j);
+                    st.insert(rev);
+                }
+            }
         }
-        VST(V);
-        ll ans=0;
-        for(ll i=0; i<m&&n; i++)
+        vector<ll>div;
+        for(ll i:st)
         {
-            if(ar[V[i].second])
+            div.PB(i);
+        }
+        VST(div);
+        reverse(div.begin(),div.end());
+        ll si_d=div.size();
+        for(ll cc=0;cc<si_d;cc++)
+        {
+            ll i=div[cc];
+            vector<ll>mo;
+            for(ll j=0; j<n; j++)
             {
-                ll mi=min(n,ar[V[i].second]);
-                n-=mi;
-                ans+=(mi*V[i].first);
+                ll rem=V[j]%i;
+                if(rem>0)mo.PB(rem);
             }
-            if(n>0)
+            ll siz=mo.size();
+            if(siz%2!=0)
             {
-                ans+=V[i].first;
-                n-=1;
+                continue;
             }
-            //cout<<i<<" "<<ans<<" "<<ar[V[i].first]<<" \n";
+            if(siz==0){
+                ans=i;break;
+            }
+            VST(mo);
+            ll j=0,k=siz-1,ck=1;
+            while(j<k)
+            {
+                if(mo[j]+mo[k]!=i)
+                {
+                    ck=0;
+                    break;
+                }
+                j++;
+                k--;
+            }
+            if(ck)
+            {
+                ans=i;
+                break;
+            }
         }
         cout<<ans<<"\n";
-        for(ll i=0; i<=m; i++)
-        {
-            ar[i]=0;
-        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
 

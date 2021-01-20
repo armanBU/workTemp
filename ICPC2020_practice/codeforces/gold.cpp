@@ -45,12 +45,23 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        vector<ll>V;
+        ll n,m,sum=0,sub=0;
         cin>>n;
-
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+            sum+=a;
+        }
+        for(ll i=0;i<n;i+=2){
+            sub+=V[i];
+        }
+        ll tm=sum-sub;
+        cout<<(ll)max(sub,tm)<<" "<<(ll)min(sub,tm)<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

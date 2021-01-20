@@ -1,3 +1,4 @@
+
 /*
     Sk arman Hossain
     University of Barisal
@@ -43,17 +44,20 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
         cin>>n;
+        for(ll i=2;i<=n;i++){
+            cout<<i<<" ";
+        }
+        cout<<"1\n";
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

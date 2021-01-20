@@ -45,11 +45,32 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
         cin>>n;
+        vector<ll>V1,V2;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V1.PB(a);
+        }
+        for(ll j=0;j<n;j++){
+            ll a;
+            cin>>a;
+            V2.PB(a);
+        }
+        ll ans=0;
+        for(ll i=0;i<n;i++){
+            ans+=(V1[i]*V2[i]);
+        }
+        if(ans==0){
+            cout<<"Yes\n";
+        }
+        else{
+            cout<<"No\n";
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

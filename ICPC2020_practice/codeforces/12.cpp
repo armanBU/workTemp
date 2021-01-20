@@ -38,6 +38,7 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+map<ll,ll>mp;
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -48,8 +49,33 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        vector<ll>V;
+        mp.clear();
         ll n,m;
-        cin>>n;
+        cin>>n>>m;
+        ll cnt=0;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            if(mp[a]==0)cnt++;
+            mp[a]++;
+            V.PB(a);
+        }
+        for(ll i=0;i<m;i++){
+            ll l,r;
+            cin>>l>>r;
+            l--;
+            if(mp[r]==0){
+                cnt++;
+            }
+            mp[r]++;
+            mp[V[l]]--;
+            if(mp[V[l]]==0){
+                cnt--;
+            }
+            V[l]=r;
+            cout<<cnt+1<<"\n";
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

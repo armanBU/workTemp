@@ -48,12 +48,19 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
+        ll n,m,k;
+        cin>>n>>m>>k;
+        ll ans=(n+m)/k;
+        n=n%k;
+        m=m%k;
+        ll tm=0;
+        if(n+m>=k){
+            tm=k-max(n,m);
+        }
+        cout<<ans<<" "<<tm<<"\n";
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

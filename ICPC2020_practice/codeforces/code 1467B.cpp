@@ -43,17 +43,66 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        vector<ll>V;
+        ll n;
         cin>>n;
-
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll prev=0;
+        ll bade=0;
+        ll ans=0;
+        ll up=-2,down=-2;
+        for(ll i=1;i<n-1;i++){
+            if(V[i]>V[i-1]&&V[i]>V[i+1]){
+                prev++;ans++;
+                ll dif=i-up;
+                if(dif==2&&V[i]!=V[i-2]){
+                    bade=max(bade,2LL);
+                }
+                up=i;
+            }
+            else if(V[i]<V[i-1]&&V[i]<V[i+1]){
+                prev++;ans++;
+                ll dif=i-down;
+                if(dif==2&&V[i]!=V[i-2]){
+                    bade=max(bade,2LL);
+                }
+                down=i;
+            }
+            else{
+                prev=0;
+            }
+            bade=max(prev,bade);
+        }
+        //cout<<ans<<" "<<bade<<" \n";
+        bade=min(3LL,bade);
+        ans-=bade;
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+/*
+my code special test
+3
+5
+1 4 3 2 3
+5
+1 4 3 5 3
+5
+1 4 3 5 3
+ans:
+1
+0
+1
+*/
 
 
 

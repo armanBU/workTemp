@@ -43,17 +43,42 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
+        vector<ll>V1,V2,V3;
+        ll n1,n2,n3,sum1=0,sum2=0,sum3=0;
+        cin>>n1>>n2>>n3;
+        for(ll i=0;i<n1;i++){
+            ll a;
+            cin>>a;
+            V1.PB(a);
+            sum1+=a;
+        }
+        for(ll i=0;i<n1;i++){
+            ll a;
+            cin>>a;
+            V2.PB(a);
+            sum2+=a;
+        }
+        for(ll i=0;i<n1;i++){
+            ll a;
+            cin>>a;
+            V3.PB(a);
+            sum3+=a;
+        }
+        VST(V1);
+        VST(V2);
+        VST(V3);
+        ll ans=0;
+
+
+
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

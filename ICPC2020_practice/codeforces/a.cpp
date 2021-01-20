@@ -38,58 +38,49 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+#define MAX 200000
+vector<ll>prime_list;
+bool prime_ck[1000001];
+
+void seive()
+{
+    prime_ck[0]=prime_ck[1]=true;
+    prime_list.push_back(2);
+    for(ll i=4; i<=MAX; i+=2)
+    {
+        prime_ck[i]=true;
+    }
+    for(ll i=3; i<=MAX; i+=2)
+    {
+        if(prime_ck[i]==0)
+        {
+            prime_list.push_back(i);
+            for(ll j=i*i; j<=MAX; j+=(i+i))
+            {
+                prime_ck[j]=1;
+            }
+        }
+    }
+}
 int main()
 {
-    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    seive();
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        string s;
-        cin>>s;
-        stack<char>st;
-//        for(ll i=0; s[i]!='\0'; i++)
-//        {
-//            if(s[i]=='(')
-//            {
-//                st.push(s[i]);
-//            }
-//            else if(st.empty())
-//            {
-//                if(s[i]=='?'||s[i]=='(')
-//                {
-//                    st.push('(');
-//                }
-//                else
-//                {
-//                    st.push(')');
-//                    break;
-//                }
-//            }
-//            else
-//            {
-//                st.pop();
-//            }
-//        }
-        ll ck=1;
-        ll n=s.size();
-        if(n%2)
-        {
-            ck=0;
-        }
-        if(s[0]==')'||s[n-1]=='(')ck=0;
-        if(ck)
-        {
-            YES;
-        }
-        else
-        {
-            NO;
-        }
-
+        ll ans=1;
+        ll d;
+        cin>>d;
+        ll pos=lower_bound(prime_list.begin(),prime_list.end(),d+1)-prime_list.begin();
+        ans*=prime_list[pos];
+        pos=lower_bound(prime_list.begin(),prime_list.end(),ans+d)-prime_list.begin();
+        ans*=prime_list[pos];
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

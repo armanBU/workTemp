@@ -43,17 +43,26 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
         cin>>n;
+        ll ans=0,cnt=0;
+        ll mo=n%10;
+        ans=(mo-1)*10;
+        while(n){
+            cnt++;
+            n/=10;
+        }
+        cnt=(cnt*(cnt+1))/2;
+        ans+=cnt;
+        cout<<ans<<"\n";
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

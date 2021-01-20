@@ -40,20 +40,48 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+   // ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        vector<ll>V,dif;
         ll n,m;
         cin>>n;
-
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll cnt=0;
+        for(ll i=1;i<n-1;i++){
+            if(V[i]>V[i-1]&&V[i]>V[i+1]){
+                dif.PB(1);
+                cnt++;
+            }
+            else if(V[i]<V[i-1]&&V[i]<V[i+1]){
+                dif.PB(0);
+                cnt++;
+            }
+            else{
+                dif.PB(-1);
+            }
+        }
+        cout<<cnt<<" x\n";
+        if(cnt){
+            cnt--;
+        }
+        ll siz=dif.size();
+        for(ll i=1;i<n-1;i++){
+            if(V[i]+V[i+1]==1){
+                cnt--;
+                break;
+            }
+        }
+        cout<<cnt<<"\n";
     }
-///*****************************  ALHAMDULILLAH  *****************************/
+/*****************************  ALHAMDULILLAH  *****************************/
 }
-
-
-

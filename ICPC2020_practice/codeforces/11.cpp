@@ -50,10 +50,51 @@ int main()
     {
         ll n,m;
         cin>>n;
-
+        string s,t;
+        cin>>s>>t;
+        ll ar_s[30],ar_t[30];
+        for(ll i=0;i<26;i++){
+            ar_s[i]=0;
+            ar_t[i]=0;
+        }
+        ll cnt_s=0,cnt_t=0;
+        for(ll i=0;i<n;i++){
+            if(s[i]=='?'){
+                cnt_s++;
+            }
+            else ar_s[s[i]-'a']++;
+        }
+        for(ll i=0;i<n;i++){
+            if(t[i]=='?'){
+                cnt_t++;
+            }
+            else ar_t[t[i]-'a']++;
+        }
+        ll ck=1;
+        for(ll i=0;i<26;i++){
+            if(ar_s[i]>ar_t[i]){
+                ll tm=ar_s[i]-ar_t[i];
+                if(cnt_s>=tm)cnt_s-=tm;
+                else {
+                    ck=0;break;
+                }
+            }
+            else if(ar_s[i]<ar_t[i]){
+                ll tm=ar_t[i]-ar_t[i];
+                if(cnt_t>=tm)cnt_t-=tm;
+                else {
+                    ck=0;break;
+                }
+            }
+        }
+        if(ck){
+            YES;
+        }
+        else{
+            NO;
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

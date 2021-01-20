@@ -43,13 +43,22 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
+        ll n,m,x;
+        cin>>n>>x;
+        ll mi=0,ma=0,sum=0;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            mi+=(a/x)+(a%x!=0);
+            sum+=a;
+        }
+        ma=sum/x+(sum%x!=0);
+        cout<<ma<<" "<<mi<<"\n";
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

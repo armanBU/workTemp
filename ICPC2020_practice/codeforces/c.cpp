@@ -38,64 +38,139 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll res,n;
+vector<ll>V,an;
+ll parent[3010];
+bitset<2000100>color;
+void dfs(ll node,ll cnt,bitset<2020>bit,ll par)
+{
+    //cout<<node<<" ";
+    // cout<<bit<<"\n";
+    if(cnt==n-1)
+    {
+        for(ll j=n-1; j>=0; j--)
+        {
+            if(bit[j]==0)
+            {
+                node+=V[j];
+                an.PB(j);
+                break;
+            }
+        }
+        res=node;
+        ll tm=res;
+        while(parent[par]!=-1)
+        {
+            an.PB(par);
+            par=parent[par];
+        }
+        an.PB(par);
+        ll ck=0;
+        for(ll j=0; j<n; j+=2)
+        {
+            ll x=V[an[j]];
+            ll y=V[an[j+1]];
+            if(x+y==res)
+            {
+                res=max(x,y);
+            }
+            else
+            {
+                ck=1;
+                break;
+            }
+        }
+        if(ck==0)
+        {
+            res=tm;
+            return;
+        }
+        else
+        {
+            res=-1;
+            an.clear();
+        }
+    }
+    for(ll i=0; i<n; i++)
+    {
+        //cout<<color[node+V[i]]<<" x\n";
+        if(color[node+V[i]]==1&&bit[i]==0)
+        {
+            //cout<<node+V[i]<<" \n";
+            bitset<2020>bit2;
+            bit2=bit;
+            bit2[i]=1;
+            parent[i]=par;
+            ll pos=lower_bound(V.begin(),V.end(),node+V[i])-V.begin();
+            bit2[pos]=1;
+            parent[pos]=i;
+            dfs(node+V[i],cnt+2,bit2,pos);
+        }
+        else if(node+V[i]>V[n-1]){
+            break;
+        }
+    }
+}
 int main()
 {
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(0);
-    //cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    //freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V;
-        ll n,m,k;
-        cin>>n>>k;
+        color.reset();
+        V.clear();
+        an.clear();
+        cin>>n;
+        n*=2;
         for(ll i=0; i<n; i++)
         {
             ll a;
             cin>>a;
             V.PB(a);
+            color[a]=1;
         }
-        ll mi=0,ma=0;
-        mi=V[0];
-        ma=V[0]+k;
-        ll ck=1;
-        for(ll i=1; i<n-1; i++)
+        VST(V);
+//        for(ll i=0;i<n;i++){
+//            cout<<V[i]<<" ";
+//        }
+//        cout<<"\n";
+        res=-1;
+        bitset<2020>bit;
+        bit.reset();
+        for(ll i=0; i<(n/2)+1; i++)
         {
-            if(V[i]>=ma)
+            bit.reset();
+            bit[i]=1;
+            parent[i]=-1;
+            dfs(V[i],1,bit,i);
+            if(res!=-1)
             {
-                ck=0;//T(3);//cout<<"ff\n";
                 break;
             }
-            if(V[i]+k+k-1<=mi)
+        }
+        if(res!=-1)
+        {
+            cout<<"YES\n";
+            cout<<res<<"\n";
+            //reverse(an.begin(),an.end());
+            for(ll i=0; i<n; i+=2)
             {
-                ck=0;//T(i);
-                //T(4);
-                //cout<<"ff22\n";
-                break;
+                cout<<V[an[i]]<<" "<<V[an[i+1]]<<"\n";
             }
-            mi=max(V[i],mi-(k-1));
-            ma=min(V[i]+k+k-1,ma+k-1);
-            //cout<<mi<<" "<<ma<<" \n";
-        }
-        if(mi>=(V[n-1]+k)||(V[n-1]>=ma))
-        {
-            ck=0;
-        }
-        if(ck)
-        {
-            YES;
         }
         else
         {
-            NO;
+            cout<<"NO\n";
         }
-
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

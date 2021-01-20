@@ -40,20 +40,20 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+   // cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
         cin>>n;
+        cout<<n<<"\n";
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

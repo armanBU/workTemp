@@ -45,15 +45,32 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        vector<ll>V;
+        ll n,m,sum_aro=0,sum_taka=0;
         cin>>n;
-
+        for(ll i=0;i<n;i++){
+            ll a,b;
+            cin>>a>>b;
+            V.PB((2*a)+b);
+            sum_aro+=a;
+        }
+        VST(V);
+        reverse(V.begin(),V.end());
+        ll ans=-1;
+        for(ll i=0;i<n;i++){
+            if(sum_aro<sum_taka){
+                ans=i;
+                break;
+            }
+            sum_taka+=V[i];
+        }
+        if(ans==-1)ans=n;
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 

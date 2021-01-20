@@ -50,6 +50,55 @@ int main()
     {
         ll n,m;
         cin>>n;
+        string fir,sec;
+        cin>>fir>>sec;
+        ll ar_fir[30],ar_sec[30];
+        memset(ar_fir,0,sizeof(ar_fir));
+        memset(ar_sec,0,sizeof(ar_sec));
+        for(ll i=0;i<n;i++){
+            ar_fir[fir[i]-'a']++;
+        }
+        for(ll i=0;i<n;i++){
+            ar_sec[sec[i]-'a']++;
+        }
+        ll ck=0,duo_ck=0;
+        for(ll i=0;i<26;i++){
+            if(ar_fir[i]!=ar_fir[i]){
+                ck=1;break;
+            }
+            if(ar_fir[i]>1){
+                duo_ck=1;
+            }
+        }
+        if(ck==1){
+            cout<<"NO\n";
+        }
+        else if(duo_ck==1||n>26){
+            cout<<"YES\n";
+        }
+        else{
+            ll cnt=0;
+            for(ll i=0;i<n;i++){
+                if(fir[i]!=sec[i]){
+                        ll pos;
+                    for(ll j=i+1;;j++){
+                        if(sec[j]==fir[i]){
+                            pos=j;break;
+                        }
+                    }
+                    for(ll j=pos;j>i;j--){
+                        sec[j]=sec[j-1];
+                        cnt++;
+                    }
+                }
+            }
+            if(cnt%2==0){
+                cout<<"YES\n";
+            }
+            else{
+                cout<<"NO\n";
+            }
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

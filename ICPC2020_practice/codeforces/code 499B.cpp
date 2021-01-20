@@ -45,11 +45,29 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n;
+        cin>>n>>m;
+        map<string,string>mp;
+        for(ll i=0;i<m;i++){
+            string s1,s2;
+            cin>>s1>>s2;
+            if(s1.size()<=s2.size()){
+                mp[s1]=s1;
+            }
+            else{
+                mp[s1]=s2;
+            }
+        }
+        for(ll i=0;i<n;i++){
+            string s;
+            cin>>s;
+            cout<<mp[s]<<" ";
+        }
+        cout<<"\n";
+
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

@@ -50,6 +50,26 @@ int main()
     {
         ll n,m;
         cin>>n;
+        ll mi=-99999999999999;
+        ll ma=99999999999999;
+        ll ck=0,ck2=0;
+        for(ll i=0;i<n;i++){
+            char c;
+            ll a;
+            cin>>c>>a;
+            if(c=='L'){
+                ma=min(ma,a);ck=1;
+            }
+            else{
+                mi=max(mi,a);ck2=1;
+            }
+        }
+        if(ma>mi+1&&ck&&ck2){
+            cout<<abs(ma-mi)-1<<"\n";
+        }
+        else{
+            cout<<"-1\n";
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

@@ -50,6 +50,16 @@ int main()
     {
         ll n,m;
         cin>>n;
+        ll ans=0,mx=-9999999999;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            ans+=a;
+            mx=max(mx,ans);
+            mx=max(mx,a);
+            if(ans<0)ans=0;
+        }
+        cout<<mx<<"\n";
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

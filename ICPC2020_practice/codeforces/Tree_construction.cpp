@@ -45,15 +45,47 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n;
-
+        cin>>n>>m;
+        ll mi=n+(n-1);
+        ll ma=(n*(n+1))/2;
+        if(m<mi||m>ma){
+            cout<<"-1\n";
+        }
+        else{
+            ll prev=1,cur=2;
+            m-=mi;
+            ll node=n-2;
+            //cout<<prev<<" "<<cur<<"\n";
+            while(m>0){
+                if(m>node){
+                    m-=node;
+                    cout<<prev<<" "<<cur<<"\n";
+                    prev++;cur++;
+                    node--;
+                }
+                else {
+                    break;
+                }
+            }
+            ll tm=cur+1;
+            cout<<prev<<" "<<cur<<"\n";
+            while(m>0){
+                cout<<cur<<" "<<tm<<"\n";
+                tm++;
+                m--;
+            }
+            while(tm<=n){
+                cout<<prev<<" "<<tm<<"\n";
+                tm++;
+            }
+        }
+        return 0;
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
