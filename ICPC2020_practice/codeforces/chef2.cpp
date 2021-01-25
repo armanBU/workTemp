@@ -43,28 +43,18 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
+        ll l,r;
+        cin>>l>>r;
+        ll dif1=l+l;
+        ll dif2=r+r;
+        ll ans=abs(dif1-dif2)+1;
+        cout<<ans<<"\n";
 
-        ll n,m;
-        cin>>n;
-        string s,s2;
-        cin>>s;
-        for(ll i=3;i<n;i+=4){
-            ll tm=s[i]-'0';
-            ll val=tm;
-            tm=s[i-1]-'0';
-            val+=tm*2;
-            tm=s[i-2]-'0';
-            val+=tm*4;
-            tm=s[i-3]-'0';
-            val+=tm*8;
-            s2+=val+'a';
-        }
-        cout<<s2<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

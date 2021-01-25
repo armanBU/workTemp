@@ -43,58 +43,72 @@ int main()
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,k,x,y;
-        cin>>n>>k>>x>>y;
-        k%=4;
-        if(x==y){
-            cout<<n<<" "<<n<<"\n";
+        ll n,m;
+        cin>>n>>m;
+        string s[12];
+        for(ll i=0; i<n; i++)
+        {
+            cin>>s[i];
         }
-        else{
-            vector<PR>V;
-            V.PB({0,0});
-            if(x>y){
-                ll dif=abs(x-n);
-                x+=dif;
-                y+=dif;
-                V.PB({x,y});
-                dif=abs(y-n);
-                x-=dif;
-                y=n;
-                V.PB({x,y});
-                y-=x;
-                x=0;
-                V.PB({x,y});
-                x+=y;
-                y=0;
-                V[0].first=x;
-                V[0].second=y;
+        ll ans,cnt=0;
+        bool ck=0;
+        for(ll i=0; i<n; i++)
+        {
+            if(i%2==0)ck=1;
+            else ck=0;
+            for(ll j=0; j<m; j++)
+            {
+                bool ha=0;
+                if(s[i][j]=='*')ha=1;
+                if(ha!=ck)
+                {
+                    cnt++;
+                }
+                ck^=1;
             }
-            else{
-                ll dif=abs(n-y);
-                x+=dif;
-                y+=dif;
-                V.PB({x,y});
-                dif=n-x;
-                x=n;
-                y-=dif;
-                V.PB({x,y});
-                x-=y;
-                y=0;
-                V.PB({x,y});
-                y+=x;
-                x=0;
-                V[0].first=x;
-                V[0].second=y;
-            }
-            cout<<V[k].first<<" "<<V[k].second<<"\n";
         }
+        ans=cnt;
+        cnt=0;
+        for(ll i=0; i<n; i++)
+        {
+            if(i%2!=0)ck=1;
+            else ck=0;
+            for(ll j=0; j<m; j++)
+            {
+                bool ha=0;
+                if(s[i][j]=='*')ha=1;
+                if(ha!=ck)
+                {
+                    cnt++;
+                }
+                ck^=1;
+            }
+        }
+        if((n*m)%2==0){
+            ans=min(ans,cnt);
+        }
+        if(n*m==2){
+            cnt=0;
+            for(ll i=0;i<n;i++){
+                for(ll j=0;j<m;j++){
+                    if(s[i][j]=='*')
+                        cnt=1;
+                }
+            }
+            if(cnt==1){
+                ans=0;
+            }
+            else ans=1;
+        }
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

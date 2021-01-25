@@ -28,6 +28,8 @@
 #define fori(i,n) for(;i<n;i++)
 #define fast ios_base::sync_with_stdio(0);cin.tie(0)
 #define MP make_pair
+#define ff first
+#define ss second
 #define tt third
 #define mod 1000000007
 #define T(n) printf("test %d\n",n)
@@ -36,92 +38,136 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll mem[4010][4010],n,k;
-vector<ll>V,cum;
-ll dp(ll i,ll sum)
-{
-    if(sum>=k)
-    {
-        ll retun=0;
-        ll second=cum[i-1]-sum;
-        if(second>=k)
-        {
-            retun=i;
-        }
-        else
-        {
-            ll baki=k-second;
-            if(cum[n-1]-cum[i-1]>=baki)
-            {
-                baki+=cum[i-1];
-                ll pos=lower_bound(cum.begin(),cum.end(),baki)-cum.begin();
-                pos++;
-                retun=pos;
-            }
-            else
-            {
-                retun=LONG_MAX;
-            }
-
-        }
-        return retun;
-    }
-    else if(i>=n)
-    {
-        return LONG_MAX;
-    }
-    if(mem[i][sum]!=-1)return mem[i][sum];
-    ll ans=LONG_MAX;
-    ans=min(ans,dp(i+1,sum+V[i]));
-    ans=min(ans,dp(i+1,sum));
-    return mem[i][sum]=ans;
-}
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-    //freopen("1input.txt","r",stdin);
+//    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        V.clear();
-        cum.clear();
-        cin>>n>>k;
-        for(ll i=0; i<=n; i++)
-        {
-            for(ll j=0; j<=k; j++)
-            {
-
-                mem[i][j]=-1;
-
-            }
-        }
+        ll n,m;
+        ll ar[4];
+        cin>>n>>m>>ar[0]>>ar[1]>>ar[2];
+        map<ll,char>mp;
+        mp[0]='R';
+        mp[1]='G';
+        mp[2]='B';
+        ll cnt=0;
+        ll cnt_in=0;
+        char s[55][55];
+        ll tm1=0,tm2=1,ck=0;
         for(ll i=0; i<n; i++)
         {
-            ll a;
-            cin>>a;
-            V.PB(a);
+            ll k=0;
+            for(ll j=i; j>=0&&k<m; j--)
+            {
+                if(ar[tm1]>0)
+                {
+                    s[j][k]=mp[tm1];
+                    ar[tm1]--;
+                }
+                else
+                {
+                    if(ck==0)
+                    {
+                        tm1=2;
+                        ck++;
+                        if(ar[tm2]>=ar[2]){
+                            swap(tm1,tm2);
+                        }
+
+                        if(ar[tm1]>0)
+                        {
+                            s[j][k]=mp[tm1];
+                            ar[tm1]--;
+                        }
+                        else
+                        {
+                            tm1=tm2;
+                            s[j][k]=mp[tm1];
+                            ar[tm1]--;
+                        }
+
+                    }
+                    else
+                    {
+                        tm1=tm2;
+                        s[j][k]=mp[tm1];
+                        ar[tm1]--;
+                    }
+                }//cout<<j<<" "<<k<<" x\n";
+                k++;
+
+            }
+            if(ck!=1){
+               swap(tm1,tm2);
+            }
+            if(ck==1)ck=2;
+
         }
-        VST(V);
-        reverse(V.begin(),V.end());
-        ll sum=0;
-        for(ll i:V)
+        ll nn=m-1;
+        for(ll i=0; i<nn; i++)
         {
-            sum+=i;
-            cum.PB(sum);
-        }
-        ll ans=dp(0,0);
-        if(ans>n)
-        {
-            cout<<"-1\n";
-        }
-        else
-        {
-            cout<<ans<<"\n";
+            ll k=i+1;
+            for(ll j=n-1; j>=0&&k<m; j--)
+            {
+                if(ar[tm1]>0)
+                {
+                    s[j][k]=mp[tm1];
+                    ar[tm1]--;
+                }
+                else
+                {
+                    if(ck==0)
+                    {
+                        tm1=2;
+                        ck++;
+                        if(ar[tm2]>=ar[2]){
+                            swap(tm1,tm2);
+                        }
+                        if(ar[tm1]>0)
+                        {
+                            s[j][k]=mp[tm1];
+                            ar[tm1]--;
+                        }
+                        else
+                        {
+                            tm1=tm2;
+                            s[j][k]=mp[tm1];
+                            ar[tm1]--;
+                        }
+
+                    }
+                    else
+                    {
+                        tm1=tm2;
+                        s[j][k]=mp[tm1];
+                        ar[tm1]--;
+                    }
+                }//cout<<j<<" "<<k<<" x\n";
+                k++;
+
+            }
+            if(ck!=1){
+               swap(tm1,tm2);
+            }
+            if(ck==1)ck=2;
         }
 
+        for(ll i=0; i<n; i++)
+        {
+            for(ll j=0; j<m; j++)
+            {
+                cout<<s[i][j];
+            }
+            cout<<"\n";
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
+
+
