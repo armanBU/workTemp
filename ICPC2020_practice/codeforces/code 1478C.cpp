@@ -38,10 +38,11 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[1010];
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
@@ -49,31 +50,74 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V,V2;
-        ll n,m,k;
-        cin>>n>>k;
-        for(ll i=0;i<=n;i++)ar[i]=0;
-        for(ll i=0;i<n;i++){
+        ll n,m;
+        cin>>n;
+        ll num=n;
+        n*=2;
+        vector<ll>V;
+        ll ck=1;
+        for(ll i=0; i<n; i++)
+        {
             ll a;
             cin>>a;
-            if(ar[a]==0){
-                V.PB(a);
-            }
-            V2.PB(a);
-            ar[a]++;
+            V.PB(a);
+            if(a%2!=0)ck=0;
         }
         VST(V);
-        VST(V2);
+        ll prev;
+        set<ll>st;
         reverse(V.begin(),V.end());
-        ll ans=1;
-        ll siz=V.size();
-        ll mi=min(k,siz);
-        for(ll i=0;i<k;i++){
-            ans=((ans%mod)*(ar[V[i]]%mod))%mod;
+        ll cnt=num-1;
+        prev=V[0];
+        ll pos=prev/num;
+        pos/=2;
+        if(V[0]%4!=0)ck=0;
+        for(ll i=3; i<n&&ck; i+=2)
+        {
+            if(V[i]==V[i-1])
+            {
+                ll x=cnt*2;
+                ll tm=abs(V[i]-prev);
+                if(tm%x!=0)
+                {
+                    ck=0;
+                    break;
+                }
+                else
+                {
+
+                    ll ne=pos-(tm/x);
+                    cnt--;
+                    if(ne>0&&ne<pos)
+                    {
+                    }
+                    else
+                    {
+                        ck=0;
+                        break;
+                    }
+                    pos=ne;
+                }
+                prev=V[i];
+            }
+            else
+            {
+                ck=0;
+                break;
+            }
         }
-        cout<<ans<<"\n";
+        if(V[0]!=V[1])ck=0;
+        if(ck)
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

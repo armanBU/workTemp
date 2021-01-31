@@ -38,122 +38,62 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[200100];
-ll nc2(ll n)
-{
-    if(n<2)
-    {
-        return 0;
-    }
-    ll dif=n-2;
-    ll ans=1;
-    for(ll i=dif+1; i<=n; i++)
-    {
-        ans*=i;
-    }
-    ans/=2;
-    return ans;
-}
-ll nc3(ll n)
-{
-    if(n<3)
-    {
-        return 0;
-    }
-    ll dif=n-3;
-    ll ans=1;
-    for(ll i=dif+1; i<=n; i++)
-    {
-        ans*=i;
-    }
-    ans/=6;
-    return ans;
-}
+ll ar[1000010];
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     //freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
+    //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V,V2;
-        ll n,m;
-        cin>>n;
-        for(ll i=0; i<n; i++)
-        {
+        ll n,m,k;
+        cin>>n>>k;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
             V.PB(a);
-            ar[i]=0;
+            ar[a]=0;
         }
-        VST(V);
-        for(ll i=0; i<n; i++)
-        {
-            ll val=V[i];
-            ll cnt=1,j;
-            for(j=i+1; j<n; j++)
-            {
-                if(V[j]!=val)
-                {
-                    break;
+        ll left=0,right=0;
+        ll ans=0,sum=0;
+        while(right<n){
+            if(sum>k){
+                ar[V[left]]--;
+                if(ar[V[left]]==0){
+                    sum-=V[left];
                 }
-                cnt++;
+                left++;
+                if(left>right){right=left;}
+                //cout<<left<<" "<<right<<" "<<sum<<" "<<ans<<" con\n";
+                continue;
             }
-            V2.PB(val);
-            ar[(ll)V2.size()-1]=cnt;
-            i=j-1;
-        }
-        ll siz=V2.size();
-        ll ans=0;
-        for(ll i=0; i<siz; i++)
-        {
-            ans+=nc3(ar[i]);
-            if(i+2<siz)
-            {
-                if(V2[i+2]-V2[i]<=2)
-                {
-                    ll tm=nc2(ar[i]);
-                    ll tm2=nc2(ar[i+1]);
-                    ll tm3=nc2(ar[i+2]);
-
-                    ans+=(tm*ar[i+1]);
-                    ans+=(tm*ar[i+2]);
-
-                    ans+=(tm2*ar[i]);
-                    ans+=(tm3*ar[i]);
-                    ans+=(ar[i]*ar[i+1]*ar[i+2]);
-
-                }
-                else if(V2[i+1]-V2[i]<=2)
-                {
-                    ll tm=nc2(ar[i]);
-                    ll tm2=nc2(ar[i+1]);
-
-                    ans+=(tm*ar[i+1]);
-                    ans+=(tm2*ar[i]);
-                }
+            ll tm=ar[V[right]];
+            if(tm>0){
+                ar[V[right]]++;
+                ans=max(ans,(right-left)+1);
+                right++;
             }
-            else if(i+1<siz)
-            {
-                if(V2[i+1]-V2[i]<=2)
-                {
-                    ll tm=nc2(ar[i]);
-                    ll tm2=nc2(ar[i+1]);
-
-                    ans+=(tm*ar[i+1]);
-                    ans+=(tm2*ar[i]);
+            else{
+                sum+=V[right];
+                ar[V[right]]++;
+                if(sum<=k){
+                    ans=max(ans,(right-left)+1);
                 }
+                right++;
             }
+            //cout<<left<<" "<<right<<" "<<sum<<" "<<ans<<" x\n";
         }
         cout<<ans<<"\n";
+        for(ll i=0;i<n;i++){
+            ar[V[i]]=0;
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
 

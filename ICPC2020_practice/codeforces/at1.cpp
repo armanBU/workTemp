@@ -45,18 +45,20 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n>>m;
-        ll x=abs(n-m);
-        if(x<=2){
-            cout<<"Yes\n";
+        ll n,ev=0,od=0;
+        cin>>n;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            if(a%2==0)ev++;
+            else od++;
         }
-        else{
-            cout<<"No\n";
-        }
+        ll mi=min(od,ev);
+        cout<<mi<<"\n";
+
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

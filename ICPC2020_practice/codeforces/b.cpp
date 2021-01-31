@@ -48,8 +48,34 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
+        ll n,m,k;
+        cin>>n>>k;
+        vector<ll>V;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        VST(V);
+        ll ans=0;
+        ll left=0,right=n-1;
+        while(left<=right){
+            if(V[right]>=k){
+                ans++;
+                right--;
+            }
+            else{
+                if(left!=right&&V[left]+V[right]>=k){
+                    left++;right--;ans++;
+                }
+                else{
+                    left++;
+                }
+            }
+        }
+        cout<<ans<<"\n";
+
+
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

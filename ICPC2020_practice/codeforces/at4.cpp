@@ -7,7 +7,6 @@
  */
 #include<bits/stdc++.h>
 #define nl cout<<"\n";
-#define N 200001
 #define PR pair<ll,ll>
 #define sf1(n) cin>>n
 #define sf2(n, m) cin>>n>>m
@@ -35,108 +34,74 @@
 #define T(n) printf("test %d\n",n)
 int dx[] = {0,0,1,-1,2,2,-2,-2,1,-1,1,-1};
 int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
-typedef long long int ll;
-typedef unsigned long long int ull;
+//typedef long long int ll;
+typedef unsigned long long int ll;
 using namespace std;
+//ll countConsecutive(ll N)
+//{
+//    // constraint on values of L gives us the
+//    // time Complexity as O(N^0.5)
+//    long int cnt = 0;
+//    for (long int L = 1; L * (L + 1) < 2 * N; L++)
+//    {
+//        double f1 = (1.0 * N-(L * (L + 1)) / 2) / (L + 1);
+//        double f2;
+//        f2=(ll)f1;
+//        //bool isEqual = ( fabs(f1 – f2) <= .0000001 );
+//        if (fabs(f1-f2) <= .0000001)
+//            cnt++;
+//    }
+//    return cnt;
+//}
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    //freopen("1input.txt","r",stdin);
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+//    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=1;
+    ll tcase=100;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<pair<PR,ll>>V;
-        ll n,C;
-        cin>>n>>C;
-        for(ll i=0; i<n; i++)
-        {
-            ll a,b,c;
-            cin>>a>>b>>c;
-            V.PB({{a,b},c});
+        vector<PR>V,so;
+        vector<ll>tm;
+        ll n,val=0;
+        cin>>n;
+        for(int i=1;i<=n;i++){
+            ll a;
+            cin>>a;
+            if(i==1)
+                val=a;
+            else
+                V.PB({a,i});
         }
-        VST(V);
-        priority_queue< PR, vector <PR>, greater<PR> > pq;
-        ll sum=0;
-        sum+=V[0].second;
-        pq.push({V[0].first.second,V[0].second});
-        ll prev=V[0].first.first;
-        ll ans=0;
-        for(ll i=1; i<n; i++)
-        {
-            ll a=V[i].first.first;
-            ll b=V[i].first.second;
-            ll c=V[i].second;
-            while(!pq.empty())
-            {
-                if(pq.top().first>=a)
-                {
-                    break;
-                }
-                PR nilam=pq.top();
-                ll tm_siz=abs(prev-nilam.first)+1;
-                prev=nilam.first+1;
-                ans+=min(tm_siz*C,sum*tm_siz);
-                sum-=pq.top().second;
-                pq.pop();
-                while(!pq.empty())
-                {
-                    if(pq.top().first==nilam.first)
-                    {
-                        sum-=pq.top().second;
-                        pq.pop();
-                    }
-                    else
-                    {
-                        break;
-                    }
-
-                }
+        sort(V.begin(),V.end());
+        ll ck=1;
+        ll sum=val;
+        for(int i=0;i<n-1;i++){
+            if(sum>=V[i].first){
+                so.PB({V[i].second,1});
+                sum+=V[i].first;
+                tm.PB(V[i].first);
             }
-
-            ll dif=abs(a-prev);
-            ll mm=min(sum*dif,C*dif);
-            ans+=mm;
-            prev=a;
-            pq.push({b,c});
-            sum+=c;
-        }
-        while(!pq.empty())
-        {
-            PR nilam=pq.top();
-            ll siz=pq.size();
-            ll tm_siz=abs(prev-nilam.first)+1;
-            ans+=min(tm_siz*C,sum*tm_siz);
-            prev=nilam.first+1;
-            sum-=pq.top().second;
-            pq.pop();
-            while(!pq.empty()&&pq.top().first==nilam.first)
-            {
-                sum-=pq.top().second;
-                pq.pop();
+            else{
+                ck=0;break;
             }
         }
-        cout<<ans<<"\n";
+        if(ck){
+            ll siz=so.size();
+            cout<<siz<<"\n";
+            for(int i=0;i<siz;i++){
+                cout<<so[i].first<<" "<<so[i].second<<" "<<tm[i]<<"\n";
+            }
+        }
+        else{
+            cout<<"-1\n";
+        }
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-/*
-8 100000000
-1 3 4
-2 5 5
-3 6 7
-4 7 2
-5 6 2
-4 7 3
-8 9 4
-10 12 3
 
-
-
-*/
 
 

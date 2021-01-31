@@ -38,8 +38,23 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll ar1[1001000];
 int main()
 {
+    vector<ll>V;
+    for(ll i=2020;i<=1000000;i+=2020){
+        ar1[i]=1;
+        V.PB(i);
+    }
+    ll siz=V.size();
+    //cout<<V.size();
+    for(ll i=2021;i<=1000000;i+=2021){
+        ar1[i]=1;
+        for(ll j:V){
+            if(i+j>1000000)break;
+            ar1[i+j]=1;
+        }
+    }
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
@@ -50,6 +65,12 @@ int main()
     {
         ll n,m;
         cin>>n;
+        if(ar1[n]){
+            cout<<"YES\n";
+        }
+        else{
+            cout<<"NO\n";
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

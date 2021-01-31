@@ -45,31 +45,22 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<PR>V1,V2;
-        ll n,m;
+        ll n;
         cin>>n;
-        ll num=pow(2,n);
-        for(ll i=1;i<=num;i++){
+        ll sum=0;
+        for(ll i=0;i<n;i++){
             ll a;
             cin>>a;
-            if(i<=num/2){
-                V1.PB({a,i});
-            }
-            else{
-                V2.PB({a,i});
-            }
+            sum+=a;
         }
-        VST(V1);
-        VST(V2);
-        num/=2;
-        if(V1[num-1].first<=V2[num-1].first){
-            cout<<V1[num-1].second<<"\n";
+        if(sum%2==0){
+            cout<<"1\n";
         }
         else{
-            cout<<V2[num-1].second<<"\n";
+            cout<<"2\n";
         }
 
     }

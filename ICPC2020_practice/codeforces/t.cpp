@@ -38,10 +38,19 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[1010];
+//ll ar[25000010];
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+//    ll cnt=1;
+//    ar[1]=1;
+//    ll cn=1,val=1;;
+//    for(ll i=0;i<=5000;i++){
+//        cn++;
+//        ll tm=(2*cn)-1;
+//        val+=tm;
+//        ar[val]=tm;
+//    }
+    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
@@ -49,31 +58,19 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V,V2;
-        ll n,m,k;
-        cin>>n>>k;
-        for(ll i=0;i<=n;i++)ar[i]=0;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            if(ar[a]==0){
-                V.PB(a);
-            }
-            V2.PB(a);
-            ar[a]++;
+        ll n,x;
+        cin>>n>>x;
+        if(x==1||x%n==0||x%2==0){
+            cout<<"Yes\n";
         }
-        VST(V);
-        VST(V2);
-        reverse(V.begin(),V.end());
-        ll ans=1;
-        ll siz=V.size();
-        ll mi=min(k,siz);
-        for(ll i=0;i<k;i++){
-            ans=((ans%mod)*(ar[V[i]]%mod))%mod;
+        else{
+            cout<<"No\n";
         }
-        cout<<ans<<"\n";
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
+
 
 

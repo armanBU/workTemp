@@ -38,6 +38,8 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll pre[200000];
+ll sup[200000];
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
@@ -45,32 +47,36 @@ int main()
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        ll n;
         cin>>n;
-        vector<ll>V1,V2;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            V1.PB(a);
+        string s;
+        cin>>s;
+        for(ll i=0;i<=n;i++){
+            pre[i]=sup[i]=0;
         }
-        for(ll j=0;j<n;j++){
-            ll a;
-            cin>>a;
-            V2.PB(a);
+        ll cnt=0;
+        for(ll i=0;i<n;i++){
+            if(s[i]=='0'){
+                cnt++;
+            }
+            pre[i]=cnt;
+        }
+        cnt=0;
+        for(ll i=n-1;i>=0;i--){
+            if(s[i]=='1'){
+                cnt++;
+            }
+            sup[i]=cnt;
         }
         ll ans=0;
         for(ll i=0;i<n;i++){
-            ans+=(V1[i]*V2[i]);
+            ans=max(ans,pre[i]+sup[i]);
         }
-        if(ans==0){
-            cout<<"Yes\n";
-        }
-        else{
-            cout<<"No\n";
-        }
+        cout<<(n-ans)<<"\n";
+
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/

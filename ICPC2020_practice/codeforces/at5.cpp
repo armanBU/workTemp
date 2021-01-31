@@ -40,17 +40,76 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
-    ll tcase=100;
+    ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
-        cin>>n;
-
+        ll n,k;
+        cin>>n>>k;
+        vector<ll>V;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        while(k%2==0)
+        {
+            k/=2;
+        }
+        if(k==1)
+        {
+            cout<<"YES\n";
+            continue;
+        }
+        ll ck=1;
+        for(ll i=0; i<n; i++)
+        {
+            ll a=V[i];
+            a%=k;
+            if(a==0)continue;
+            if(k%2!=0){
+                ck=0;break;
+            }
+            set<ll>st;
+            st.insert(a);
+            while(a<k)
+            {
+                a*=2;
+                if(a==k)
+                {
+                    break;
+                }
+                ll siz1=st.size();
+                a%=k;
+                st.insert(a);
+                ll siz2=st.size();
+                if(siz1==siz2||(k%2==0&&a%2==0))
+                {
+                    break;
+                }
+            }
+            a%=k;
+            if(a!=0)
+            {
+                ck=0;
+                break;
+            }
+        }
+        if(ck)
+        {
+            cout<<"YES\n";
+        }
+        else
+        {
+            cout<<"NO\n";
+        }
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

@@ -38,41 +38,71 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[1010];
+#define MAX 1000003
+vector<ll>prime_list;
+bool prime_ck[1000101];
+void seive()
+{
+    prime_ck[0]=prime_ck[1]=true;
+    prime_list.push_back(2);
+    for(ll i=4; i<=MAX; i+=2)
+    {
+        prime_ck[i]=true;
+    }
+    for(ll i=3; i<=MAX; i+=2)
+    {
+        if(prime_ck[i]==0)
+        {
+            prime_list.push_back(i);
+            for(ll j=i*i; j<=MAX; j+=(i+i))
+            {
+                prime_ck[j]=1;
+            }
+        }
+    }
+    //Here prime_list vector indicate list of all prime number
+    //prime_ck array indicate a number is prime ? or not ?
+    //if prime_ck[n]=0 then number is prime else not a prime
+}
 int main()
 {
+    seive();
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
-    for(ll test=1; test<=tcase; test++)
-    {
-        vector<ll>V,V2;
-        ll n,m,k;
-        cin>>n>>k;
-        for(ll i=0;i<=n;i++)ar[i]=0;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            if(ar[a]==0){
-                V.PB(a);
+    ll n;
+    while(cin>>n){
+        if(n==0)break;
+        vector<ll>V;
+        for(ll i:prime_list){
+            if(i>n)break;
+            ll cnt=0;
+            ll num=n;
+            while(num>=i){
+                num/=i;
+                cnt++;
             }
-            V2.PB(a);
-            ar[a]++;
+            if(i==5){
+                V[0]-=cnt;
+                V.PB(0);
+            }
+            else{
+                V.PB(cnt);
+            }
         }
-        VST(V);
-        VST(V2);
-        reverse(V.begin(),V.end());
-        ll ans=1;
+        if(n==1){
+            cout<<"1\n";continue;
+        }
+        ll ans=pow(2,V[0]);
         ll siz=V.size();
-        ll mi=min(k,siz);
-        for(ll i=0;i<k;i++){
-            ans=((ans%mod)*(ar[V[i]]%mod))%mod;
+        for(ll i=1;i<siz;i++){
+            ans=((ans%10)*((ll)pow(prime_list[i],V[i])%10))%10;
         }
         cout<<ans<<"\n";
     }
+    return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
 

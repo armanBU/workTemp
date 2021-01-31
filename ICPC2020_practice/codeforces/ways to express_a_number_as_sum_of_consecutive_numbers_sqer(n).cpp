@@ -7,7 +7,6 @@
  */
 #include<bits/stdc++.h>
 #define nl cout<<"\n";
-#define N 200001
 #define PR pair<ll,ll>
 #define sf1(n) cin>>n
 #define sf2(n, m) cin>>n>>m
@@ -38,42 +37,37 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[1010];
+ll countConsecutive(ll N)
+{
+    // constraint on values of L gives us the
+    // time Complexity as O(N^0.5)
+    long int cnt = 0;
+    for (long int L = 1; L * (L + 1) < 2 * N; L++)
+    {
+        double f1 = (1.0 * N-(L * (L + 1)) / 2) / (L + 1);
+        double f2;
+        f2=(ll)f1;
+        //bool isEqual = ( fabs(f1 – f2) <= .0000001 );
+        if (fabs(f1-f2) <= .0000001)
+            cnt++;
+    }
+    return cnt;
+}
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V,V2;
-        ll n,m,k;
-        cin>>n>>k;
-        for(ll i=0;i<=n;i++)ar[i]=0;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            if(ar[a]==0){
-                V.PB(a);
-            }
-            V2.PB(a);
-            ar[a]++;
-        }
-        VST(V);
-        VST(V2);
-        reverse(V.begin(),V.end());
-        ll ans=1;
-        ll siz=V.size();
-        ll mi=min(k,siz);
-        for(ll i=0;i<k;i++){
-            ans=((ans%mod)*(ar[V[i]]%mod))%mod;
-        }
-        cout<<ans<<"\n";
+        ll n;
+        cin>>n;
+        ll val=countConsecutive(n)+1;
+        cout<<val<<"\n";
     }
+    return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
-

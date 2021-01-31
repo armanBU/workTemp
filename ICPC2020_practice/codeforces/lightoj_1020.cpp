@@ -38,10 +38,11 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-ll ar[1010];
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
@@ -49,31 +50,38 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V,V2;
-        ll n,m,k;
-        cin>>n>>k;
-        for(ll i=0;i<=n;i++)ar[i]=0;
-        for(ll i=0;i<n;i++){
-            ll a;
-            cin>>a;
-            if(ar[a]==0){
-                V.PB(a);
+        ll n,m;
+        cin>>n;
+        string s;
+        cin>>s;
+        if(s[0]=='B')
+        {
+            if(n%3!=0)
+            {
+                cout<<"Case "<<test<<": Bob\n";
             }
-            V2.PB(a);
-            ar[a]++;
+            else
+            {
+                cout<<"Case "<<test<<": Alice\n";
+            }
         }
-        VST(V);
-        VST(V2);
-        reverse(V.begin(),V.end());
-        ll ans=1;
-        ll siz=V.size();
-        ll mi=min(k,siz);
-        for(ll i=0;i<k;i++){
-            ans=((ans%mod)*(ar[V[i]]%mod))%mod;
+        else
+        {
+            n%=3;
+            if(n==1)
+            {
+                cout<<"Case "<<test<<": Bob\n";
+            }
+            else
+            {
+                cout<<"Case "<<test<<": Alice\n";
+            }
         }
-        cout<<ans<<"\n";
+
     }
+    return 0;
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

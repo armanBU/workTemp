@@ -41,20 +41,45 @@ using namespace std;
 int main()
 {
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-//    freopen("1input.txt","r",stdin);
+    //freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll l,r;
-        cin>>l>>r;
-        ll dif1=l+l;
-        ll dif2=r+r;
-        ll ans=abs(dif1-dif2)+1;
+        ll n,m;
+        cin>>n;
+        vector<ll>V;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+        }
+        ll ans=0;
+        ll left=0,right=0;
+        ll cur_ma=V[0],ma;
+        for(ll left=0; left<n;)
+        {
+            if(cur_ma==0){
+                ans=-1;break;
+            }
+            ll right=left+1;
+            ma=V[right];
+            for(; right<n&&right<=left+cur_ma; right++)
+            {
+                ma=max(ma-1,V[right]);
+            }
+            cur_ma=ma;
+            left=right;
+            ans++;
+            if(cur_ma==0){
+                ans=-1;break;
+            }
+            //T(1);
+        }
         cout<<ans<<"\n";
-
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

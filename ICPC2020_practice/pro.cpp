@@ -33,6 +33,7 @@
 #define tt third
 #define mod 1000000007
 #define T(n) printf("test %d\n",n)
+# define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 int dx[] = {0,0,1,-1,2,2,-2,-2,1,-1,1,-1};
 int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
@@ -40,19 +41,23 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
-    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    fast;
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    cin>>tcase;
+    //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll n,m;
+        vector<ll>V;
+        ll n;
         cin>>n;
+
+
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 

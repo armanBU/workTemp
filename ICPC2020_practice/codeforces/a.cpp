@@ -38,33 +38,8 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
-#define MAX 200000
-vector<ll>prime_list;
-bool prime_ck[1000001];
-
-void seive()
-{
-    prime_ck[0]=prime_ck[1]=true;
-    prime_list.push_back(2);
-    for(ll i=4; i<=MAX; i+=2)
-    {
-        prime_ck[i]=true;
-    }
-    for(ll i=3; i<=MAX; i+=2)
-    {
-        if(prime_ck[i]==0)
-        {
-            prime_list.push_back(i);
-            for(ll j=i*i; j<=MAX; j+=(i+i))
-            {
-                prime_ck[j]=1;
-            }
-        }
-    }
-}
 int main()
 {
-    seive();
     ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 //    freopen("1input.txt","r",stdin);
 //    freopen("1output.txt","w",stdout);
@@ -73,14 +48,21 @@ int main()
     cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        ll ans=1;
-        ll d;
-        cin>>d;
-        ll pos=lower_bound(prime_list.begin(),prime_list.end(),d+1)-prime_list.begin();
-        ans*=prime_list[pos];
-        pos=lower_bound(prime_list.begin(),prime_list.end(),ans+d)-prime_list.begin();
-        ans*=prime_list[pos];
-        cout<<ans<<"\n";
+        ll n,m,od=0,ev=0;
+        cin>>n;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            if(a%2==0)ev++;
+            else od++;
+        }
+        if(od==0){
+            cout<<"-1\n";
+        }
+        else{
+            cout<<ev<<"\n";
+        }
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

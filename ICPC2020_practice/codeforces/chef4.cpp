@@ -49,66 +49,10 @@ int main()
     for(ll test=1; test<=tcase; test++)
     {
         ll n,m;
-        cin>>n>>m;
-        string s[12];
-        for(ll i=0; i<n; i++)
-        {
-            cin>>s[i];
-        }
-        ll ans,cnt=0;
-        bool ck=0;
-        for(ll i=0; i<n; i++)
-        {
-            if(i%2==0)ck=1;
-            else ck=0;
-            for(ll j=0; j<m; j++)
-            {
-                bool ha=0;
-                if(s[i][j]=='*')ha=1;
-                if(ha!=ck)
-                {
-                    cnt++;
-                }
-                ck^=1;
-            }
-        }
-        ans=cnt;
-        cnt=0;
-        for(ll i=0; i<n; i++)
-        {
-            if(i%2!=0)ck=1;
-            else ck=0;
-            for(ll j=0; j<m; j++)
-            {
-                bool ha=0;
-                if(s[i][j]=='*')ha=1;
-                if(ha!=ck)
-                {
-                    cnt++;
-                }
-                ck^=1;
-            }
-        }
-        if((n*m)%2==0){
-            ans=min(ans,cnt);
-        }
-        if(n*m==2){
-            cnt=0;
-            for(ll i=0;i<n;i++){
-                for(ll j=0;j<m;j++){
-                    if(s[i][j]=='*')
-                        cnt=1;
-                }
-            }
-            if(cnt==1){
-                ans=0;
-            }
-            else ans=1;
-        }
-        cout<<ans<<"\n";
+        cin>>n;
+
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
-
 
 
