@@ -1,244 +1,66 @@
-#include<bits/stdc++.h>
-using namespace std;
-typedef long long ll;
+/*
+    Sk arman Hossain
+    University of Barisal
 
+    Problem :
+    Solution :
+ */
+#include<bits/stdc++.h>
+#define nl cout<<"\n";
+#define PR pair<ll,ll>
+#define sf1(n) cin>>n
+#define sf2(n, m) cin>>n>>m
+#define sf3(n, m,k ) cin>>n>>m>>k
+#define pfn(n) printf("%d\n",n)s
+#define pf1(n) printf("%d ",n)
+#define pfl1(n) printf("%lld ",n)
+#define pfln(n) printf("%lld\n",n)
+#define pfu(n) printf("%llu\n",n)
+#define pfs(s) printf("%s",s)
+#define YES cout<<"YES\n";
+#define NO cout<<"NO\n";
+#define minus1 printf("-1\n");
+#define PB push_back
+#define PI 3.1415926536
+#define VST(v) sort(v.begin(),v.end())
+#define VSTr(v) sort(v.begin(),v.end(),greater<long long int>())
+#define VSTcmp(v,cmp) sort(v.begin(),v.end(),cmp)
+#define fori(i,n) for(;i<n;i++)
+#define MP make_pair
+#define ff first
+#define ss second
+#define tt third
+#define mod 1000000007
+#define T(n) printf("test %d\n",n)
+# define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define N 200001
+int dx[] = {0,0,1,-1,2,2,-2,-2,1,-1,1,-1};
+int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
+typedef long long int ll;
+typedef unsigned long long int ull;
+using namespace std;
 int main()
 {
-    ll t;
-    cin>>t;
-    ll n;
-    char s[310][310];
-    ll arr[310][310];
-    while(t--){
+    fast;
+//    freopen("1input.txt","r",stdin);
+//    freopen("1output.txt","w",stdout);
+    ll tcase=1;
+    //sf1(tcase);
+    //cin>>tcase;
+    for(ll test=1; test<=tcase; test++)
+    {
+        vector<ll>V;
+        ll n;
         cin>>n;
-        for(ll i=0;i<n;i++){
-            cin>>s[i];
-        }
+        cout<<n<<"adasd\n";
 
-///////////////////////////////////////////////////////////////
 
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                arr[i][j]=0;
-            }
-        }
 
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(s[i][j]=='X'){
-                    ll ct1=0;
-                    for(ll k=j+1;k<j+3;k++){
-                        if(k>=n)break;
-                        if(s[i][k]=='X')ct1++;
-                    }
-                    if(ct1==2){
-                        for(ll k=j;k<j+3;k++){
-                            arr[i][k]++;
-                        }
-                    }
-                    ll ct2=0;
-                    for(ll k=i+1;k<i+3;k++){
-                        if(k>=n)break;
-                        if(s[k][j]=='X')ct2++;
-                    }
-                    if(ct2==2){
-                        for(ll k=i;k<i+3;k++){
-                            arr[k][j]++;
-                        }
-                    }
-                    ll ct3=0;
-                    for(ll k=i+1, l=j+1;k<i+3&&l<j+3;k++,l++){
-                            if(k>=n||l>=n)break;
-                            if(s[k][l]=='x')ct3++;
-                    }
-                    if(ct3==2){
-                        for(ll k=i, l=j;k<i+3&&l<j+3;k++,l++){
-                            arr[k][l]++;
-                        }
-                    }
-                    ll ct4=0;
-                    for(ll k=i-1, l=j-1;k>i-3&&l>j-3;k--,l--){
-                            if(k<0||l<0)break;
-                            if(s[k][l]=='x')ct4++;
-                    }
-                    if(ct4==2){
-                        for(ll k=i, l=j;k>i-3&&l>j-3;k--,l--){
-                            arr[k][l]++;
-                        }
-                    }
-                }
-
-            }
-        }
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(arr[i][j]==4){
-                    s[i][j]='O';
-                }
-            }
-        }
-
-//////////////////////////////////////////////////////////////
-
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                arr[i][j]=0;
-            }
-        }
-
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(s[i][j]=='X'){
-                    ll ct1=0;
-                    for(ll k=j+1;k<j+3;k++){
-                        if(k>=n)break;
-                        if(s[i][k]=='X')ct1++;
-                    }
-                    if(ct1==2){
-                        for(ll k=j;k<j+3;k++){
-                            arr[i][k]++;
-                        }
-                    }
-                    ll ct2=0;
-                    for(ll k=i+1;k<i+3;k++){
-                        if(k>=n)break;
-                        if(s[k][j]=='X')ct2++;
-                    }
-                    if(ct2==2){
-                        for(ll k=i;k<i+3;k++){
-                            arr[k][j]++;
-                        }
-                    }
-                    ll ct3=0;
-                    for(ll k=i+1, l=j+1;k<i+3&&l<j+3;k++,l++){
-                            if(k>=n||l>=n)break;
-                            if(s[k][l]=='x')ct3++;
-                    }
-                    if(ct3==2){
-                        for(ll k=i, l=j;k<i+3&&l<j+3;k++,l++){
-                            arr[k][l]++;
-                        }
-                    }
-                    ll ct4=0;
-                    for(ll k=i-1, l=j-1;k>i-3&&l>j-3;k--,l--){
-                            if(k<0||l<0)break;
-                            if(s[k][l]=='x')ct4++;
-                    }
-                    if(ct4==2){
-                        for(ll k=i, l=j;k>i-3&&l>j-3;k--,l--){
-                            arr[k][l]++;
-                        }
-                    }
-                }
-
-            }
-        }
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(arr[i][j]==3){
-                    s[i][j]='O';
-                }
-            }
-        }
-
-//////////////////////////////////////////////////////////////
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                arr[i][j]=0;
-            }
-        }
-
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(s[i][j]=='X'){
-                    ll ct1=0;
-                    for(ll k=j+1;k<j+3;k++){
-                        if(k>=n)break;
-                        if(s[i][k]=='X')ct1++;
-                    }
-                    if(ct1==2){
-                        for(ll k=j;k<j+3;k++){
-                            arr[i][k]++;
-                        }
-                    }
-                    ll ct2=0;
-                    for(ll k=i+1;k<i+3;k++){
-                        if(k>=n)break;
-                        if(s[k][j]=='X')ct2++;
-                    }
-                    if(ct2==2){
-                        for(ll k=i;k<i+3;k++){
-                            arr[k][j]++;
-                        }
-                    }
-                    ll ct3=0;
-                    for(ll k=i+1, l=j+1;k<i+3&&l<j+3;k++,l++){
-                            if(k>=n||l>=n)break;
-                            if(s[k][l]=='x')ct3++;
-                    }
-                    if(ct3==2){
-                        for(ll k=i, l=j;k<i+3&&l<j+3;k++,l++){
-                            arr[k][l]++;
-                        }
-                    }
-                    ll ct4=0;
-                    for(ll k=i-1, l=j-1;k>i-3&&l>j-3;k--,l--){
-                            if(k<0||l<0)break;
-                            if(s[k][l]=='x')ct4++;
-                    }
-                    if(ct4==2){
-                        for(ll k=i, l=j;k>i-3&&l>j-3;k--,l--){
-                            arr[k][l]++;
-                        }
-                    }
-                }
-
-            }
-        }
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(arr[i][j]==2){
-                    s[i][j]='O';
-                }
-            }
-        }
-
-//////////////////////////////////////////////////////////////
-        for(ll i=0;i<n;i++){
-            for(ll j=0;j<n;j++){
-                if(s[i][j]=='X'){
-                    ll ct1=0;
-                    for(ll k=j+1;k<j+3;k++){
-                        if(k>=n)break;
-                        if(s[i][k]=='X')ct1++;
-                    }
-                    if(ct1==2)s[i][j+2]='O';
-                    ll ct2=0;
-                    for(ll k=i+1;k<i+3;k++){
-                        if(k>=n)break;
-                        if(s[k][j]=='X')ct2++;
-                    }
-                    if(ct2==2)s[i+2][j]='O';
-                    ll ct3=0;
-                    for(ll k=i+1, l=j+1;k<i+3&&l<j+3;k++,l++){
-                            if(k>=n||l>=n)break;
-                            if(s[k][l]=='x')ct3++;
-                    }
-                    if(ct3==2)s[i+2][j+2]='O';
-                    ll ct4=0;
-                    for(ll k=i-1, l=j-1;k>i-3&&l>j-3;k--,l--){
-                            if(k<0||l<0)break;
-                            if(s[k][l]=='x')ct4++;
-                    }
-                    if(ct4==2)s[i-2][j-2]='O';
-                    //if(ct1==2||ct2==2||ct3==2||ct4==2)s[i][j]='O';
-                }
-
-            }
-        }
-        for(ll i=0;i<n;i++){
-            cout<<s[i]<<"\n";
-        }
     }
-    return 0;
+///*****************************  ALHAMDULILLAH  *****************************/
 }
+
+
+
+
+
