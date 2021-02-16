@@ -43,24 +43,24 @@ int main()
 {
     fast;
 //    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+//    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
-        }
-
-
-
+        ll n;
+        cin>>n;
+        ll ans=n*2;
+        ans=sqrt(ans);
+        ans-=1;
+        ans/=2;
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

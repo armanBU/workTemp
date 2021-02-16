@@ -43,24 +43,31 @@ int main()
 {
     fast;
 //    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+//    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
+        ll n,mi=200;
+        cin>>n;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            mi=min(a,mi);
+            V.PB(a);
         }
-
+        ll ans=0;
+        for(ll i:V){
+        if(i>mi)ans++;}
+        cout<<ans<<"\n";
 
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

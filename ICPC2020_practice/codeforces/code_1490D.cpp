@@ -39,28 +39,68 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll label[110],n;
+vector<ll>V;
+void dfs(ll dep,ll l,ll r)
+{
+    if(r<0)return;
+    if(l>=n)return;
+    if(l==r)
+    {
+        if(label[V[l]]==-1)
+        label[V[l]]=dep;
+        return;
+    }
+    else if(l>=0&&r<n&&r>l)
+    {
+        ll ma=V[l],pos=l;
+        for(ll i=l; i<=r; i++)
+        {
+            if(V[i]>ma)
+            {
+                ma=V[i];
+                pos=i;
+            }
+        }
+        if(label[V[pos]]==-1){
+            label[V[pos]]=dep;
+            dfs(dep+1,l,pos-1);
+            dfs(dep+1,pos+1,r);
+        }
+    }
+
+    // T(1);
+}
 int main()
 {
+
     fast;
 //    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+//    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
+        cin>>n;
+        V.clear();
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            V.PB(a);
+            label[i+1]=-1;
         }
-
-
-
+        dfs(0,0,n-1);
+        for(ll i=0; i<n; i++)
+        {
+            cout<<label[V[i]]<<" ";
+        }
+        cout<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

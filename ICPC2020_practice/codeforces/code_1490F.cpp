@@ -39,25 +39,63 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+ll ar[200010];
 int main()
 {
     fast;
-//    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+    //freopen("1input.txt","r",stdin);
+//    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
+        ll n;
+        cin>>n;
+        set<ll>st;
+        map<ll,ll>mp;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            st.insert(a);
+            mp[a]++;
+            ar[i]=0;
         }
-
-
-
+        for(ll i:st){
+            V.PB(mp[i]);
+            //cout<<mp[i]<<" ";
+        }
+        //cout<<"\n";
+        VST(V);
+        ar[n]=0;
+        ll sum=0;
+        ll siz=V.size();
+        for(ll i=0;i<siz;i++){
+            sum+=V[i];
+            ar[i]=sum;
+        }
+        ar[siz]=sum;
+        ll ans=999999999999;
+        for(ll i=0;i<siz;i++){
+            ll tm,val=V[i];
+            ll cnt=(siz-i);
+            cnt*=V[i];
+            ll bade=0;
+            ll total=0;
+            if(i-1>=0){
+                bade=ar[i-1];
+                total=sum-ar[i-1];
+            }
+            else{
+                total=sum;
+            }
+            total+=bade;
+            total-=cnt;
+            ans=min(ans,total);
+           // cout<<V[i]<<" "<<total<<" "<<cnt<<"\n";
+        }
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }

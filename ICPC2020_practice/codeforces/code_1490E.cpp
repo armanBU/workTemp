@@ -41,19 +41,50 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
+
     fast;
 //    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+//    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
+        vector<PR>V;
+        ll n;
+        cin>>n;
+        for(ll i=0;i<n;i++){
+            ll a;
+            cin>>a;
+            V.PB({a,i});
+        }
+        VST(V);
+        ll ans=V[0].first,pos=-1;
+        for(ll i=1;i<n;i++){
+            if(V[i].first>ans){
+                pos=i;
+            }
+            ans+=V[i].first;
+        }
+        if(pos==-1){
+            cout<<n<<"\n";
+            for(ll i=1;i<=n;i++){
+                cout<<i<<" ";
+            }
+            cout<<"\n";
+        }
+        else{
+            vector<ll>tt;
+            for(ll i=pos;i<n;i++){
+                tt.PB(V[i].second+1);
+            }
+            VST(tt);
+            ll si=tt.size();
+            cout<<si<<"\n";
+            for(ll i:tt){
+                cout<<i<<" ";
+            }
+            cout<<"\n";
         }
 
 
@@ -61,6 +92,7 @@ int main()
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

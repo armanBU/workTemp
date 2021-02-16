@@ -41,26 +41,62 @@ typedef unsigned long long int ull;
 using namespace std;
 int main()
 {
+
     fast;
 //    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+//    freopen("1output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
         vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
+        ll n,ans=0;
+        cin>>n;
+        ll ar[5];
+        ar[0]=ar[1]=ar[2]=0;
+        for(ll i=0; i<n; i++)
+        {
+            ll a;
+            cin>>a;
+            ar[a%3]++;
         }
-
-
-
+        ll tm=n/3;
+        if(ar[2]>tm)
+        {
+            ar[0]+=(ar[2]-tm);
+            ans+=(ar[2]-tm);
+            ar[2]=tm;
+        }
+        if(ar[0]>tm)
+        {
+            ar[1]+=(ar[0]-tm);
+            ans+=(ar[0]-tm);
+            ar[0]=tm;
+        }
+        if(ar[1]>tm)
+        {
+            ar[2]+=(ar[1]-tm);
+            ans+=(ar[1]-tm);
+            ar[1]=tm;
+        }
+        if(ar[2]>tm)
+        {
+            ar[0]+=(ar[2]-tm);
+            ans+=(ar[2]-tm);
+            ar[2]=tm;
+        }
+        if(ar[0]>tm)
+        {
+            ar[1]+=(ar[0]-tm);
+            ans+=(ar[0]-tm);
+            ar[0]=tm;
+        }
+        cout<<ans<<"\n";
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 

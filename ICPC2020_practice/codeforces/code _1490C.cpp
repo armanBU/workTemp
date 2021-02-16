@@ -39,28 +39,56 @@ int dy[] = {1,-1,0,0,1,-1,1,-1,2,2,-2,-2};
 typedef long long int ll;
 typedef unsigned long long int ull;
 using namespace std;
+#define N 1000000000000
 int main()
 {
-    fast;
-//    freopen("1input.txt","r",stdin);
-    freopen("1input.txt","w",stdout);
+    vector<ll>V;
+    for(ll i=1; i*i*i<=N; i++)
+    {
+        V.PB(i*i*i);
+    }
+    ll siz=V.size();
+    //fast;
+    freopen("1input.txt","r",stdin);
+    freopen("2output.txt","w",stdout);
     ll tcase=1;
     //sf1(tcase);
-    //cin>>tcase;
+    cin>>tcase;
     for(ll test=1; test<=tcase; test++)
     {
-        vector<ll>V;
-        ll n=1000;
-        cout<<n<<"\n";
-        for(ll i=1;i<=n;i++){
-            cout<<i<<"\n";
+
+        ll n,ck=1;
+        cin>>n;
+        for(ll i=0; i<siz; i++)
+        {
+            if(V[i]>=n)
+            {
+                break;
+            }
+            ll tm=n-V[i];
+            ll pos=lower_bound(V.begin(),V.end(),tm)-V.begin();
+            if(pos<siz)
+            {
+                if(V[i]+V[pos]==n)
+                {
+                    ck=0;
+                    break;
+                }
+            }
         }
-
-
+        if(ck==0)
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
 
     }
 ///*****************************  ALHAMDULILLAH  *****************************/
 }
+
 
 
 
